@@ -77,7 +77,6 @@ const allowedLinks = new Set(
 
 function assertDescription(description: string): void {
   const linkRegexp = /\[([^\]]+)\]\(([^)]+)\)/g;
-  // eslint-disable-next-line unicorn/prefer-iterator-to-array -- Requires Node 22+
   const links = [...description.matchAll(linkRegexp)].map((m) => m[2]);
 
   for (const link of links) {

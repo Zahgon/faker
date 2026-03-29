@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/no-unused-array-method-return -- False positive: https://github.com/sindresorhus/eslint-plugin-unicorn/issues/1193 */
 import {
   isEmail,
   isFQDN,

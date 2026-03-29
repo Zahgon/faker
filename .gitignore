@@ -36,8 +36,6 @@ node_modules/
 # Optional npm cache directory
 .npm
 
-# Optional eslint cache
-.eslintcache
 
 # Microbundle cache
 .rpt2_cache/
@@ -113,3 +111,4 @@ cypress/videos
 .playwright-mcp/
 
 _local/
+.claude/
