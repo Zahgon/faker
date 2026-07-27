@@ -1,6 +1,6 @@
 import type { Faker } from '../../faker';
 import { SimpleModuleBase } from '../../internal/module-base';
-import type { NumberRange } from '../../utils/types';
+import type { NumberOrRange } from '../../utils/types';
 import { fakeEval } from './_eval';
 import { arrayElement as helpersArrayElement } from './array-element';
 import { arrayElements as helpersArrayElements } from './array-elements';
@@ -430,10 +430,7 @@ export class SimpleHelpersModule extends SimpleModuleBase {
    *
    * @since 6.3.0
    */
-  arrayElements<const T>(
-    array: ReadonlyArray<T>,
-    count?: number | NumberRange
-  ): T[] {
+  arrayElements<const T>(array: ReadonlyArray<T>, count?: NumberOrRange): T[] {
     return helpersArrayElements(this.faker.fakerCore, array, count);
   }
 
@@ -477,7 +474,7 @@ export class SimpleHelpersModule extends SimpleModuleBase {
    *
    * @since 8.0.0
    */
-  rangeToNumber(numberOrRange: number | NumberRange): number {
+  rangeToNumber(numberOrRange: NumberOrRange): number {
     return helpersRangeToNumber(this.faker.fakerCore, numberOrRange);
   }
 
@@ -506,7 +503,7 @@ export class SimpleHelpersModule extends SimpleModuleBase {
        *
        * @default 3
        */
-      count?: number | NumberRange;
+      count?: NumberOrRange;
     } = {}
   ): TResult[] {
     return helpersMultiple(this.faker.fakerCore, method, options);

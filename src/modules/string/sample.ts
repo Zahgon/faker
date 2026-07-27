@@ -1,5 +1,5 @@
 import type { FakerCore } from '../../core';
-import type { NumberRange } from '../../utils/types';
+import type { NumberOrRange } from '../../utils/types';
 import { rangeToNumber } from '../helpers/range-to-number';
 import { int } from '../number/int';
 
@@ -20,7 +20,7 @@ import { int } from '../number/int';
  */
 export function sample(
   fakerCore: FakerCore,
-  length: number | NumberRange = 10
+  length: NumberOrRange = 10
 ): string {
   length = rangeToNumber(fakerCore, length);
 

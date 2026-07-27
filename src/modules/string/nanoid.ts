@@ -1,5 +1,5 @@
 import type { FakerCore } from '../../core';
-import type { NumberRange } from '../../utils/types';
+import type { NumberOrRange } from '../../utils/types';
 import { arrayElement } from '../helpers/array-element';
 import { rangeToNumber } from '../helpers/range-to-number';
 import { weightedArrayElement } from '../helpers/weighted-array-element';
@@ -22,7 +22,7 @@ import { alphanumeric } from './alphanumeric';
  */
 export function nanoid(
   fakerCore: FakerCore,
-  length: number | NumberRange = 21
+  length: NumberOrRange = 21
 ): string {
   length = rangeToNumber(fakerCore, length);
   if (length <= 0) {

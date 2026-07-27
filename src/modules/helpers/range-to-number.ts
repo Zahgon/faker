@@ -1,5 +1,5 @@
 import type { FakerCore } from '../../core';
-import type { NumberRange } from '../../utils/types';
+import type { NumberOrRange } from '../../utils/types';
 import { int } from '../number/int';
 
 /**
@@ -18,7 +18,7 @@ import { int } from '../number/int';
  */
 export function rangeToNumber(
   fakerCore: FakerCore,
-  numberOrRange: number | NumberRange
+  numberOrRange: NumberOrRange
 ): number {
   if (typeof numberOrRange === 'number') {
     return numberOrRange;

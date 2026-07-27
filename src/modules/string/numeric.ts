@@ -1,7 +1,7 @@
 import type { FakerCore } from '../../core';
 import { FakerError } from '../../errors/faker-error';
 import type { LiteralUnion } from '../../internal/types';
-import type { NumberRange } from '../../utils/types';
+import type { NumberOrRange } from '../../utils/types';
 import { arrayElement } from '../helpers/array-element';
 import { rangeToNumber } from '../helpers/range-to-number';
 import { DIGIT_CHARS, type NumericChar } from './_types';
@@ -38,7 +38,7 @@ export function numeric(
          *
          * @default 1
          */
-        length?: number | NumberRange;
+        length?: NumberOrRange;
         /**
          * Whether leading zeros are allowed or not.
          *

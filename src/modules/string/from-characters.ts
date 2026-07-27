@@ -1,6 +1,6 @@
 import type { FakerCore } from '../../core';
 import { FakerError } from '../../errors/faker-error';
-import type { NumberRange } from '../../utils/types';
+import type { NumberOrRange } from '../../utils/types';
 import { arrayElement } from '../helpers/array-element';
 import { multiple } from '../helpers/multiple';
 import { rangeToNumber } from '../helpers/range-to-number';
@@ -26,7 +26,7 @@ import { rangeToNumber } from '../helpers/range-to-number';
 export function fromCharacters(
   fakerCore: FakerCore,
   characters: string | ReadonlyArray<string>,
-  length: number | NumberRange = 1
+  length: NumberOrRange = 1
 ): string {
   length = rangeToNumber(fakerCore, length);
   if (length <= 0) {

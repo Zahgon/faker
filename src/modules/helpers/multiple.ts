@@ -1,5 +1,5 @@
 import type { FakerCore } from '../../core';
-import type { NumberRange } from '../../utils/types';
+import type { NumberOrRange } from '../../utils/types';
 import { rangeToNumber } from './range-to-number';
 
 /**
@@ -29,7 +29,7 @@ export function multiple<const TResult>(
      *
      * @default 3
      */
-    count?: number | NumberRange;
+    count?: NumberOrRange;
   } = {}
 ): TResult[] {
   const count = rangeToNumber(fakerCore, options.count ?? 3);

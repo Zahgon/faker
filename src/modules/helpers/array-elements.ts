@@ -1,5 +1,5 @@
 import type { FakerCore } from '../../core';
-import type { NumberRange } from '../../utils/types';
+import type { NumberOrRange } from '../../utils/types';
 import { int } from '../number/int';
 import { rangeToNumber } from './range-to-number';
 import { shuffle } from './shuffle';
@@ -25,7 +25,7 @@ import { shuffle } from './shuffle';
 export function arrayElements<const T>(
   fakerCore: FakerCore,
   array: ReadonlyArray<T>,
-  count?: number | NumberRange
+  count?: NumberOrRange
 ): T[] {
   if (array.length === 0) {
     return [];

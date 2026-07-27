@@ -1,6 +1,6 @@
 import { SimpleModuleBase } from '../../internal/module-base';
 import type { LiteralUnion } from '../../internal/types';
-import type { Casing, NumberRange } from '../../utils/types';
+import type { Casing, NumberOrRange } from '../../utils/types';
 import type { AlphaChar, AlphaNumericChar, NumericChar } from './_types';
 import { alpha as stringAlpha } from './alpha';
 import { alphanumeric as stringAlphanumeric } from './alphanumeric';
@@ -51,7 +51,7 @@ export class StringModule extends SimpleModuleBase {
    */
   fromCharacters(
     characters: string | ReadonlyArray<string>,
-    length: number | NumberRange = 1
+    length: NumberOrRange = 1
   ): string {
     return stringFromCharacters(this.faker.fakerCore, characters, length);
   }
@@ -83,7 +83,7 @@ export class StringModule extends SimpleModuleBase {
            *
            * @default 1
            */
-          length?: number | NumberRange;
+          length?: NumberOrRange;
           /**
            * The casing of the characters.
            *
@@ -128,7 +128,7 @@ export class StringModule extends SimpleModuleBase {
            *
            * @default 1
            */
-          length?: number | NumberRange;
+          length?: NumberOrRange;
           /**
            * The casing of the characters.
            *
@@ -171,7 +171,7 @@ export class StringModule extends SimpleModuleBase {
        *
        * @default 1
        */
-      length?: number | NumberRange;
+      length?: NumberOrRange;
       /**
        * Prefix for the generated number.
        *
@@ -208,7 +208,7 @@ export class StringModule extends SimpleModuleBase {
        *
        * @default 1
        */
-      length?: number | NumberRange;
+      length?: NumberOrRange;
       /**
        * Prefix for the generated number.
        *
@@ -248,7 +248,7 @@ export class StringModule extends SimpleModuleBase {
        *
        * @default 1
        */
-      length?: number | NumberRange;
+      length?: NumberOrRange;
       /**
        * Casing of the generated number.
        *
@@ -295,7 +295,7 @@ export class StringModule extends SimpleModuleBase {
            *
            * @default 1
            */
-          length?: number | NumberRange;
+          length?: NumberOrRange;
           /**
            * Whether leading zeros are allowed or not.
            *
@@ -327,7 +327,7 @@ export class StringModule extends SimpleModuleBase {
    *
    * @since 8.0.0
    */
-  sample(length: number | NumberRange = 10): string {
+  sample(length: NumberOrRange = 10): string {
     return stringSample(this.faker.fakerCore, length);
   }
 
@@ -465,7 +465,7 @@ export class StringModule extends SimpleModuleBase {
    *
    * @since 8.0.0
    */
-  nanoid(length: number | NumberRange = 21): string {
+  nanoid(length: NumberOrRange = 21): string {
     return stringNanoid(this.faker.fakerCore, length);
   }
 
@@ -487,7 +487,7 @@ export class StringModule extends SimpleModuleBase {
    *
    * @since 8.0.0
    */
-  symbol(length: number | NumberRange = 1): string {
+  symbol(length: NumberOrRange = 1): string {
     return stringSymbol(this.faker.fakerCore, length);
   }
 }

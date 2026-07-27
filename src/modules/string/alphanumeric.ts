@@ -1,6 +1,6 @@
 import type { FakerCore } from '../../core';
 import type { LiteralUnion } from '../../internal/types';
-import type { Casing, NumberRange } from '../../utils/types';
+import type { Casing, NumberOrRange } from '../../utils/types';
 import { rangeToNumber } from '../helpers/range-to-number';
 import {
   DIGIT_CHARS,
@@ -39,7 +39,7 @@ export function alphanumeric(
          *
          * @default 1
          */
-        length?: number | NumberRange;
+        length?: NumberOrRange;
         /**
          * The casing of the characters.
          *

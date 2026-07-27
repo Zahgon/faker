@@ -1,5 +1,5 @@
 import type { FakerCore } from '../../core';
-import type { NumberRange } from '../../utils/types';
+import type { NumberOrRange } from '../../utils/types';
 import { fromCharacters } from './from-characters';
 
 const OCTAL_CHARS = ['0', '1', '2', '3', '4', '5', '6', '7'];
@@ -31,7 +31,7 @@ export function octal(
      *
      * @default 1
      */
-    length?: number | NumberRange;
+    length?: NumberOrRange;
     /**
      * Prefix for the generated number.
      *

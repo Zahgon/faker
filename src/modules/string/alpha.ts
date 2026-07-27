@@ -1,6 +1,6 @@
 import type { FakerCore } from '../../core';
 import type { LiteralUnion } from '../../internal/types';
-import type { Casing, NumberRange } from '../../utils/types';
+import type { Casing, NumberOrRange } from '../../utils/types';
 import { rangeToNumber } from '../helpers/range-to-number';
 import type { AlphaChar } from './_types';
 import { LOWER_CHARS, UPPER_CHARS } from './_types';
@@ -35,7 +35,7 @@ export function alpha(
          *
          * @default 1
          */
-        length?: number | NumberRange;
+        length?: NumberOrRange;
         /**
          * The casing of the characters.
          *

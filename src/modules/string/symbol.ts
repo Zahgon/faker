@@ -1,5 +1,5 @@
 import type { FakerCore } from '../../core';
-import type { NumberRange } from '../../utils/types';
+import type { NumberOrRange } from '../../utils/types';
 import { fromCharacters } from './from-characters';
 
 const SYMBOL_CHARS = [
@@ -58,7 +58,7 @@ const SYMBOL_CHARS = [
  */
 export function symbol(
   fakerCore: FakerCore,
-  length: number | NumberRange = 1
+  length: NumberOrRange = 1
 ): string {
   return fromCharacters(fakerCore, SYMBOL_CHARS, length);
 }

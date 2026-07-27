@@ -1,5 +1,5 @@
 import type { FakerCore } from '../../core';
-import type { NumberRange } from '../../utils/types';
+import type { NumberOrRange } from '../../utils/types';
 import { fromCharacters } from './from-characters';
 
 /**
@@ -29,7 +29,7 @@ export function binary(
      *
      * @default 1
      */
-    length?: number | NumberRange;
+    length?: NumberOrRange;
     /**
      * Prefix for the generated number.
      *
