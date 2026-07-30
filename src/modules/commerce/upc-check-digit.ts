@@ -14,19 +14,5 @@ import { FakerError } from '../../errors/faker-error';
  * @since 10.2.0
  */
 export function calculateUPCCheckDigit(digits: string): number {
-  if (!/^\d{11}$/.test(digits)) {
-    throw new FakerError(
-      'calculateUPCCheckDigit expects exactly 11 numeric digits'
-    );
-  }
-
-  let sum = 0;
-  let idx = 0;
-  for (const digit of digits) {
-    const n = Number.parseInt(digit, 10);
-    sum += n * (idx % 2 === 0 ? 3 : 1);
-    idx++;
-  }
-
-  return (10 - (sum % 10)) % 10;
+    throw new Error("STUB");
 }

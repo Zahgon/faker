@@ -1408,19 +1408,12 @@ const iban: Iban = {
     'ZW',
   ],
   mod97: (digitStr) => {
-    let m = 0;
-    for (const element of digitStr) {
-      m = (m * 10 + +element) % 97;
-    }
-
-    return m;
+      throw new Error("STUB");
   },
   pattern10: ['01', '02', '03', '04', '05', '06', '07', '08', '09'],
   pattern100: ['001', '002', '003', '004', '005', '006', '007', '008', '009'],
   toDigitString: (str) =>
-    str.replaceAll(/[A-Z]/gi, (match) =>
-      String((match.toUpperCase().codePointAt(0) ?? Number.NaN) - 55)
-    ),
+    { throw new Error("STUB"); },
 };
 
 export default iban;

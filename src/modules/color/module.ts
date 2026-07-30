@@ -57,28 +57,7 @@ function formatHexColor(
     casing: Casing;
   }
 ): string {
-  const { prefix, casing } = options;
-
-  switch (casing) {
-    case 'upper': {
-      hexColor = hexColor.toUpperCase();
-      break;
-    }
-
-    case 'lower': {
-      hexColor = hexColor.toLowerCase();
-      break;
-    }
-
-    case 'mixed':
-    // Do nothing
-  }
-
-  if (prefix) {
-    hexColor = prefix + hexColor;
-  }
-
-  return hexColor;
+    throw new Error("STUB");
 }
 
 /**
@@ -87,18 +66,7 @@ function formatHexColor(
  * @param values Array of values to be converted.
  */
 function toBinary(values: number[]): string {
-  const binary: string[] = values.map((value) => {
-    const isFloat = value % 1 !== 0;
-    if (isFloat) {
-      const buffer = new ArrayBuffer(4);
-      new DataView(buffer).setFloat32(0, value);
-      const bytes = new Uint8Array(buffer);
-      return toBinary([...bytes]).replaceAll(' ', '');
-    }
-
-    return (value >>> 0).toString(2).padStart(8, '0');
-  });
-  return binary.join(' ');
+    throw new Error("STUB");
 }
 
 /**
@@ -107,7 +75,7 @@ function toBinary(values: number[]): string {
  * @param value The value to convert to a percentage.
  */
 function toPercentage(value: number): number {
-  return Math.round(value * 100);
+    throw new Error("STUB");
 }
 
 /**
@@ -122,51 +90,7 @@ function toCSS(
   cssFunction: CssFunctionType = 'rgb',
   space: CssSpaceType = 'sRGB'
 ): string {
-  switch (cssFunction) {
-    case 'rgba': {
-      return `rgba(${values[0]}, ${values[1]}, ${values[2]}, ${values[3]})`;
-    }
-
-    case 'color': {
-      return `color(${space} ${values[0]} ${values[1]} ${values[2]})`;
-    }
-
-    case 'cmyk': {
-      return `cmyk(${toPercentage(values[0])}%, ${toPercentage(
-        values[1]
-      )}%, ${toPercentage(values[2])}%, ${toPercentage(values[3])}%)`;
-    }
-
-    case 'hsl': {
-      return `hsl(${values[0]}deg ${toPercentage(values[1])}% ${toPercentage(
-        values[2]
-      )}%)`;
-    }
-
-    case 'hsla': {
-      return `hsl(${values[0]}deg ${toPercentage(values[1])}% ${toPercentage(
-        values[2]
-      )}% / ${toPercentage(values[3])})`;
-    }
-
-    case 'hwb': {
-      return `hwb(${values[0]} ${toPercentage(values[1])}% ${toPercentage(
-        values[2]
-      )}%)`;
-    }
-
-    case 'lab': {
-      return `lab(${toPercentage(values[0])}% ${values[1]} ${values[2]})`;
-    }
-
-    case 'lch': {
-      return `lch(${toPercentage(values[0])}% ${values[1]} ${values[2]})`;
-    }
-
-    case 'rgb': {
-      return `rgb(${values[0]}, ${values[1]}, ${values[2]})`;
-    }
-  }
+    throw new Error("STUB");
 }
 
 /**
@@ -183,19 +107,7 @@ function toColorFormat(
   cssFunction: CssFunctionType = 'rgb',
   space: CssSpaceType = 'sRGB'
 ): string | number[] {
-  switch (format) {
-    case 'css': {
-      return toCSS(values, cssFunction, space);
-    }
-
-    case 'binary': {
-      return toBinary(values);
-    }
-
-    case 'decimal': {
-      return values;
-    }
-  }
+    throw new Error("STUB");
 }
 
 /**
@@ -217,7 +129,7 @@ export class ColorModule extends ModuleBase {
    * @since 7.0.0
    */
   human(): string {
-    return this.faker.helpers.arrayElement(this.faker.definitions.color.human);
+      throw new Error("STUB");
   }
 
   /**
@@ -230,7 +142,7 @@ export class ColorModule extends ModuleBase {
    * @since 7.0.0
    */
   space(): string {
-    return this.faker.helpers.arrayElement(this.faker.definitions.color.space);
+      throw new Error("STUB");
   }
 
   /**
@@ -242,7 +154,7 @@ export class ColorModule extends ModuleBase {
    * @since 7.0.0
    */
   cssSupportedFunction(): CssFunctionType {
-    return this.faker.helpers.enumValue(CssFunction);
+      throw new Error("STUB");
   }
 
   /**
@@ -254,7 +166,7 @@ export class ColorModule extends ModuleBase {
    * @since 7.0.0
    */
   cssSupportedSpace(): CssSpaceType {
-    return this.faker.helpers.enumValue(CssSpace);
+      throw new Error("STUB");
   }
 
   /**
@@ -402,30 +314,7 @@ export class ColorModule extends ModuleBase {
       includeAlpha?: boolean;
     } = {}
   ): string | number[] {
-    const {
-      format = 'hex',
-      includeAlpha = false,
-      prefix = '#',
-      casing = 'lower',
-    } = options;
-    let color: string | number[];
-    if (format === 'hex') {
-      color = this.faker.string.hexadecimal({
-        length: includeAlpha ? 8 : 6,
-        prefix: '',
-      });
-      color = formatHexColor(color, { prefix, casing });
-      return color;
-    }
-
-    let cssFunction: CssFunctionType = 'rgb';
-    color = Array.from({ length: 3 }, () => this.faker.number.int(255));
-    if (includeAlpha) {
-      color.push(this.faker.number.float({ multipleOf: 0.01 }));
-      cssFunction = 'rgba';
-    }
-
-    return toColorFormat(color, format, cssFunction);
+      throw new Error("STUB");
   }
 
   /**
@@ -501,11 +390,7 @@ export class ColorModule extends ModuleBase {
     format?: ColorFormat;
   }): string | number[];
   cmyk(options: { format?: ColorFormat } = {}): string | number[] {
-    const { format = 'decimal' } = options;
-    const color: string | number[] = Array.from({ length: 4 }, () =>
-      this.faker.number.float({ multipleOf: 0.01 })
-    );
-    return toColorFormat(color, format, 'cmyk');
+      throw new Error("STUB");
   }
 
   /**
@@ -613,13 +498,7 @@ export class ColorModule extends ModuleBase {
       includeAlpha?: boolean;
     } = {}
   ): string | number[] {
-    const { format = 'decimal', includeAlpha = false } = options;
-    const hsl: number[] = [this.faker.number.int(360)];
-    for (let i = 0; i < (options?.includeAlpha ? 3 : 2); i++) {
-      hsl.push(this.faker.number.float({ multipleOf: 0.01 }));
-    }
-
-    return toColorFormat(hsl, format, includeAlpha ? 'hsla' : 'hsl');
+      throw new Error("STUB");
   }
 
   /**
@@ -718,13 +597,7 @@ export class ColorModule extends ModuleBase {
       format?: ColorFormat;
     } = {}
   ): string | number[] {
-    const { format = 'decimal' } = options;
-    const hsl: number[] = [this.faker.number.int(360)];
-    for (let i = 0; i < 2; i++) {
-      hsl.push(this.faker.number.float({ multipleOf: 0.01 }));
-    }
-
-    return toColorFormat(hsl, format, 'hwb');
+      throw new Error("STUB");
   }
 
   /**
@@ -800,15 +673,7 @@ export class ColorModule extends ModuleBase {
     format?: ColorFormat;
   }): string | number[];
   lab(options: { format?: ColorFormat } = {}): string | number[] {
-    const { format = 'decimal' } = options;
-    const lab = [this.faker.number.float({ multipleOf: 0.000001 })];
-    for (let i = 0; i < 2; i++) {
-      lab.push(
-        this.faker.number.float({ min: -100, max: 100, multipleOf: 0.0001 })
-      );
-    }
-
-    return toColorFormat(lab, format, 'lab');
+      throw new Error("STUB");
   }
 
   /**
@@ -896,13 +761,7 @@ export class ColorModule extends ModuleBase {
     format?: ColorFormat;
   }): string | number[];
   lch(options: { format?: ColorFormat } = {}): string | number[] {
-    const { format = 'decimal' } = options;
-    const lch = [this.faker.number.float({ multipleOf: 0.000001 })];
-    for (let i = 0; i < 2; i++) {
-      lch.push(this.faker.number.float({ max: 230, multipleOf: 0.1 }));
-    }
-
-    return toColorFormat(lch, format, 'lch');
+      throw new Error("STUB");
   }
 
   /**
@@ -1004,11 +863,6 @@ export class ColorModule extends ModuleBase {
       space?: CssSpaceType;
     } = {}
   ): string | number[] {
-    const { format = 'decimal', space = 'sRGB' } = options;
-
-    const color = Array.from({ length: 3 }, () =>
-      this.faker.number.float({ multipleOf: 0.0001 })
-    );
-    return toColorFormat(color, format, 'color', space);
+      throw new Error("STUB");
   }
 }

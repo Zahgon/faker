@@ -135,7 +135,7 @@ export class StringModule extends SimpleModuleBase {
     }
 
     return this.faker.helpers
-      .multiple(() => this.faker.helpers.arrayElement(characters as string[]), {
+      .multiple(() => { throw new Error("STUB"); }, {
         count: length,
       })
       .join('');
@@ -219,7 +219,7 @@ export class StringModule extends SimpleModuleBase {
       }
     }
 
-    charsArray = charsArray.filter((elem) => !exclude.includes(elem));
+    charsArray = charsArray.filter((elem) => { throw new Error("STUB"); });
 
     return this.fromCharacters(charsArray, length);
   }
@@ -303,7 +303,7 @@ export class StringModule extends SimpleModuleBase {
       }
     }
 
-    charsArray = charsArray.filter((elem) => !exclude.includes(elem));
+    charsArray = charsArray.filter((elem) => { throw new Error("STUB"); });
 
     return this.fromCharacters(charsArray, length);
   }
@@ -342,11 +342,7 @@ export class StringModule extends SimpleModuleBase {
       prefix?: string;
     } = {}
   ): string {
-    const { prefix = '0b' } = options;
-
-    let result = prefix;
-    result += this.fromCharacters(['0', '1'], options.length ?? 1);
-    return result;
+      throw new Error("STUB");
   }
 
   /**
@@ -383,14 +379,7 @@ export class StringModule extends SimpleModuleBase {
       prefix?: string;
     } = {}
   ): string {
-    const { prefix = '0o' } = options;
-
-    let result = prefix;
-    result += this.fromCharacters(
-      ['0', '1', '2', '3', '4', '5', '6', '7'],
-      options.length ?? 1
-    );
-    return result;
+      throw new Error("STUB");
   }
 
   /**
@@ -436,47 +425,7 @@ export class StringModule extends SimpleModuleBase {
       prefix?: string;
     } = {}
   ): string {
-    const { casing = 'mixed', prefix = '0x' } = options;
-    const length = this.faker.helpers.rangeToNumber(options.length ?? 1);
-    if (length <= 0) {
-      return prefix;
-    }
-
-    let wholeString = this.fromCharacters(
-      [
-        '0',
-        '1',
-        '2',
-        '3',
-        '4',
-        '5',
-        '6',
-        '7',
-        '8',
-        '9',
-        'a',
-        'b',
-        'c',
-        'd',
-        'e',
-        'f',
-        'A',
-        'B',
-        'C',
-        'D',
-        'E',
-        'F',
-      ],
-      length
-    );
-
-    if (casing === 'upper') {
-      wholeString = wholeString.toUpperCase();
-    } else if (casing === 'lower') {
-      wholeString = wholeString.toLowerCase();
-    }
-
-    return `${prefix}${wholeString}`;
+      throw new Error("STUB");
   }
 
   /**
@@ -523,50 +472,7 @@ export class StringModule extends SimpleModuleBase {
           exclude?: ReadonlyArray<LiteralUnion<NumericChar>> | string;
         } = {}
   ): string {
-    if (typeof options === 'number') {
-      options = {
-        length: options,
-      };
-    }
-
-    const length = this.faker.helpers.rangeToNumber(options.length ?? 1);
-    if (length <= 0) {
-      return '';
-    }
-
-    const { allowLeadingZeros = true } = options;
-    let { exclude = [] } = options;
-
-    if (typeof exclude === 'string') {
-      exclude = [...exclude];
-    }
-
-    const allowedDigits = DIGIT_CHARS.filter(
-      (digit) => !exclude.includes(digit)
-    );
-
-    if (
-      allowedDigits.length === 0 ||
-      (allowedDigits.length === 1 &&
-        !allowLeadingZeros &&
-        allowedDigits[0] === '0')
-    ) {
-      throw new FakerError(
-        'Unable to generate numeric string, because all possible digits are excluded.'
-      );
-    }
-
-    let result = '';
-
-    if (!allowLeadingZeros && !exclude.includes('0')) {
-      result += this.faker.helpers.arrayElement(
-        allowedDigits.filter((digit) => digit !== '0')
-      );
-    }
-
-    result += this.fromCharacters(allowedDigits, length - result.length);
-
-    return result;
+      throw new Error("STUB");
   }
 
   /**
@@ -584,22 +490,7 @@ export class StringModule extends SimpleModuleBase {
    * @since 8.0.0
    */
   sample(length: NumberOrRange = 10): string {
-    length = this.faker.helpers.rangeToNumber(length);
-
-    const charCodeOption = {
-      min: 33,
-      max: 125,
-    };
-
-    let returnString = '';
-
-    while (returnString.length < length) {
-      returnString += String.fromCodePoint(
-        this.faker.number.int(charCodeOption)
-      );
-    }
-
-    return returnString;
+      throw new Error("STUB");
   }
 
   /**
@@ -691,16 +582,7 @@ export class StringModule extends SimpleModuleBase {
       refDate?: string | Date | number;
     } = {}
   ): string {
-    const { version = 4, refDate = this.faker.defaultRefDate() } = options;
-    switch (version) {
-      case 7: {
-        return uuidV7(this.faker, toDate(refDate));
-      }
-
-      default: {
-        return uuidV4(this.faker);
-      }
-    }
+      throw new Error("STUB");
   }
 
   /**
@@ -728,10 +610,7 @@ export class StringModule extends SimpleModuleBase {
       refDate?: string | Date | number;
     } = {}
   ): string {
-    const { refDate = this.faker.defaultRefDate() } = options;
-    const date = toDate(refDate);
-
-    return dateToBase32(date) + this.fromCharacters(CROCKFORDS_BASE32, 16);
+      throw new Error("STUB");
   }
 
   /**
@@ -749,31 +628,7 @@ export class StringModule extends SimpleModuleBase {
    * @since 8.0.0
    */
   nanoid(length: NumberOrRange = 21): string {
-    length = this.faker.helpers.rangeToNumber(length);
-    if (length <= 0) {
-      return '';
-    }
-
-    const generators = [
-      {
-        value: () => this.alphanumeric(1),
-        // a-z is 26 characters
-        // this times 2 for upper & lower case is 52
-        // add all numbers 0-9 (10 in total) you get 62
-        weight: 62,
-      },
-      {
-        value: () => this.faker.helpers.arrayElement(['_', '-']),
-        weight: 2,
-      },
-    ];
-    let result = '';
-    while (result.length < length) {
-      const charGen = this.faker.helpers.weightedArrayElement(generators);
-      result += charGen();
-    }
-
-    return result;
+      throw new Error("STUB");
   }
 
   /**
@@ -795,42 +650,6 @@ export class StringModule extends SimpleModuleBase {
    * @since 8.0.0
    */
   symbol(length: NumberOrRange = 1): string {
-    return this.fromCharacters(
-      [
-        '!',
-        '"',
-        '#',
-        '$',
-        '%',
-        '&',
-        "'",
-        '(',
-        ')',
-        '*',
-        '+',
-        ',',
-        '-',
-        '.',
-        '/',
-        ':',
-        ';',
-        '<',
-        '=',
-        '>',
-        '?',
-        '@',
-        '[',
-        '\\',
-        ']',
-        '^',
-        '_',
-        '`',
-        '{',
-        '|',
-        '}',
-        '~',
-      ],
-      length
-    );
+      throw new Error("STUB");
   }
 }

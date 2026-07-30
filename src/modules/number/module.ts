@@ -273,16 +273,7 @@ export class NumberModule extends SimpleModuleBase {
           max?: number;
         } = {}
   ): string {
-    if (typeof options === 'number') {
-      options = { max: options };
-    }
-
-    const { min = 0, max = 1 } = options;
-
-    return this.int({
-      max,
-      min,
-    }).toString(2);
+      throw new Error("STUB");
   }
 
   /**
@@ -323,16 +314,7 @@ export class NumberModule extends SimpleModuleBase {
           max?: number;
         } = {}
   ): string {
-    if (typeof options === 'number') {
-      options = { max: options };
-    }
-
-    const { min = 0, max = 7 } = options;
-
-    return this.int({
-      max,
-      min,
-    }).toString(8);
+      throw new Error("STUB");
   }
 
   /**
@@ -371,16 +353,7 @@ export class NumberModule extends SimpleModuleBase {
           max?: number;
         } = {}
   ): string {
-    if (typeof options === 'number') {
-      options = { max: options };
-    }
-
-    const { min = 0, max = 15 } = options;
-
-    return this.int({
-      max,
-      min,
-    }).toString(16);
+      throw new Error("STUB");
   }
 
   /**
@@ -433,52 +406,7 @@ export class NumberModule extends SimpleModuleBase {
           multipleOf?: bigint | number | string | boolean;
         } = {}
   ): bigint {
-    if (
-      typeof options === 'bigint' ||
-      typeof options === 'number' ||
-      typeof options === 'string' ||
-      typeof options === 'boolean'
-    ) {
-      options = {
-        max: options,
-      };
-    }
-
-    const min = BigInt(options.min ?? 0);
-    const max = BigInt(options.max ?? min + BigInt(999999999999999));
-
-    if (max < min) {
-      throw new FakerError(`Max ${max} should be larger than min ${min}.`);
-    }
-
-    const multipleOf = BigInt(options.multipleOf ?? 1);
-
-    if (multipleOf <= BigInt(0)) {
-      throw new FakerError(`multipleOf should be greater than 0.`);
-    }
-
-    const effectiveMin = min / multipleOf + (min % multipleOf > 0n ? 1n : 0n); // Math.ceil(min / multipleOf)
-    const effectiveMax = max / multipleOf - (max % multipleOf < 0n ? 1n : 0n); // Math.floor(max / multipleOf)
-
-    if (effectiveMin === effectiveMax) {
-      return effectiveMin * multipleOf;
-    }
-
-    if (effectiveMax < effectiveMin) {
-      throw new FakerError(
-        `No suitable bigint value between ${min} and ${max} found.`
-      );
-    }
-
-    const delta = effectiveMax - effectiveMin + 1n; // +1 for inclusive max bounds and even distribution
-    const offset =
-      BigInt(
-        this.faker.string.numeric({
-          length: delta.toString(10).length,
-          allowLeadingZeros: true,
-        })
-      ) % delta;
-    return (effectiveMin + offset) * multipleOf;
+      throw new Error("STUB");
   }
 
   /**
@@ -521,54 +449,6 @@ export class NumberModule extends SimpleModuleBase {
           max?: number;
         } = {}
   ): string {
-    const DEFAULT_MIN = 1;
-    const DEFAULT_MAX = 3999;
-
-    if (typeof options === 'number') {
-      options = {
-        max: options,
-      };
-    }
-
-    const { min = DEFAULT_MIN, max = DEFAULT_MAX } = options;
-
-    if (min < DEFAULT_MIN) {
-      throw new FakerError(
-        `Min value ${min} should be ${DEFAULT_MIN} or greater.`
-      );
-    }
-
-    if (max > DEFAULT_MAX) {
-      throw new FakerError(
-        `Max value ${max} should be ${DEFAULT_MAX} or less.`
-      );
-    }
-
-    let num = this.int({ min, max });
-
-    const lookup: Array<[string, number]> = [
-      ['M', 1000],
-      ['CM', 900],
-      ['D', 500],
-      ['CD', 400],
-      ['C', 100],
-      ['XC', 90],
-      ['L', 50],
-      ['XL', 40],
-      ['X', 10],
-      ['IX', 9],
-      ['V', 5],
-      ['IV', 4],
-      ['I', 1],
-    ];
-
-    let result = '';
-
-    for (const [k, v] of lookup) {
-      result += k.repeat(Math.floor(num / v));
-      num %= v;
-    }
-
-    return result;
+      throw new Error("STUB");
   }
 }

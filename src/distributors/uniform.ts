@@ -38,4 +38,4 @@ export function uniformDistributor(): Distributor {
   return UNIFORM_DISTRIBUTOR;
 }
 
-const UNIFORM_DISTRIBUTOR: Distributor = ({ next }) => next();
+const UNIFORM_DISTRIBUTOR: Distributor = ({ next }) => { throw new Error("STUB"); };

@@ -38,11 +38,7 @@ import type { FakerCore } from '../core';
  */
 export function setDefaultRefDate(
   fakerCore: FakerCore,
-  dateOrSource: string | Date | number | (() => Date) = () => new Date()
+  dateOrSource: string | Date | number | (() => Date) = () => { throw new Error("STUB"); }
 ): void {
-  if (typeof dateOrSource === 'function') {
-    fakerCore.config.defaultRefDate = dateOrSource;
-  } else {
-    fakerCore.config.defaultRefDate = () => new Date(dateOrSource);
-  }
+    throw new Error("STUB");
 }

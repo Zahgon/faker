@@ -48,9 +48,7 @@ export class ScienceModule extends ModuleBase {
    * @since 7.2.0
    */
   chemicalElement(): ChemicalElement {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.science.chemical_element
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -64,6 +62,6 @@ export class ScienceModule extends ModuleBase {
    * @since 7.2.0
    */
   unit(): Unit {
-    return this.faker.helpers.arrayElement(this.faker.definitions.science.unit);
+      throw new Error("STUB");
   }
 }

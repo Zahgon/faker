@@ -4,7 +4,7 @@
  * @param str The string to validate.
  */
 export function luhnCheck(str: string): boolean {
-  return luhnChecksum(str) === 0;
+    throw new Error("STUB");
 }
 
 /**
@@ -14,8 +14,7 @@ export function luhnCheck(str: string): boolean {
  * May contain the `L` placeholder at the end.
  */
 export function luhnCheckValue(str: string): number {
-  const checksum = luhnChecksum(str.replace(/L?$/, '0'));
-  return checksum === 0 ? 0 : 10 - checksum;
+    throw new Error("STUB");
 }
 
 /**
@@ -24,21 +23,5 @@ export function luhnCheckValue(str: string): number {
  * @param str The string to generate the checksum for.
  */
 function luhnChecksum(str: string): number {
-  str = str.replaceAll(/[\s-]/g, '');
-  let sum = 0;
-  let alternate = false;
-  for (let i = str.length - 1; i >= 0; i--) {
-    let n = Number.parseInt(str[i]);
-    if (alternate) {
-      n *= 2;
-      if (n > 9) {
-        n = (n % 10) + 1;
-      }
-    }
-
-    sum += n;
-    alternate = !alternate;
-  }
-
-  return sum % 10;
+    throw new Error("STUB");
 }

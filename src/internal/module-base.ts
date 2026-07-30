@@ -7,7 +7,7 @@ import { bindThisToMemberFunctions } from './bind-this-to-member-functions';
  */
 export abstract class SimpleModuleBase {
   constructor(protected readonly faker: SimpleFaker) {
-    bindThisToMemberFunctions(this);
+      throw new Error("STUB");
   }
 }
 

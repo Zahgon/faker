@@ -27,7 +27,7 @@ export class MusicModule extends ModuleBase {
    * @since 9.0.0
    */
   album(): string {
-    return this.faker.helpers.arrayElement(this.faker.definitions.music.album);
+      throw new Error("STUB");
   }
 
   /**
@@ -39,7 +39,7 @@ export class MusicModule extends ModuleBase {
    * @since 9.0.0
    */
   artist(): string {
-    return this.faker.helpers.arrayElement(this.faker.definitions.music.artist);
+      throw new Error("STUB");
   }
 
   /**
@@ -51,7 +51,7 @@ export class MusicModule extends ModuleBase {
    * @since 5.2.0
    */
   genre(): string {
-    return this.faker.helpers.arrayElement(this.faker.definitions.music.genre);
+      throw new Error("STUB");
   }
 
   /**
@@ -63,8 +63,6 @@ export class MusicModule extends ModuleBase {
    * @since 7.1.0
    */
   songName(): string {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.music.song_name
-    );
+      throw new Error("STUB");
   }
 }

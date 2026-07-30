@@ -21,7 +21,7 @@ export class AnimalModule extends ModuleBase {
    * @since 5.5.0
    */
   dog(): string {
-    return this.faker.helpers.arrayElement(this.faker.definitions.animal.dog);
+      throw new Error("STUB");
   }
 
   /**
@@ -33,7 +33,7 @@ export class AnimalModule extends ModuleBase {
    * @since 5.5.0
    */
   cat(): string {
-    return this.faker.helpers.arrayElement(this.faker.definitions.animal.cat);
+      throw new Error("STUB");
   }
 
   /**
@@ -45,7 +45,7 @@ export class AnimalModule extends ModuleBase {
    * @since 5.5.0
    */
   snake(): string {
-    return this.faker.helpers.arrayElement(this.faker.definitions.animal.snake);
+      throw new Error("STUB");
   }
 
   /**
@@ -57,7 +57,7 @@ export class AnimalModule extends ModuleBase {
    * @since 5.5.0
    */
   bear(): string {
-    return this.faker.helpers.arrayElement(this.faker.definitions.animal.bear);
+      throw new Error("STUB");
   }
 
   /**
@@ -69,7 +69,7 @@ export class AnimalModule extends ModuleBase {
    * @since 5.5.0
    */
   lion(): string {
-    return this.faker.helpers.arrayElement(this.faker.definitions.animal.lion);
+      throw new Error("STUB");
   }
 
   /**
@@ -81,9 +81,7 @@ export class AnimalModule extends ModuleBase {
    * @since 5.5.0
    */
   cetacean(): string {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.animal.cetacean
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -95,7 +93,7 @@ export class AnimalModule extends ModuleBase {
    * @since 5.5.0
    */
   horse(): string {
-    return this.faker.helpers.arrayElement(this.faker.definitions.animal.horse);
+      throw new Error("STUB");
   }
 
   /**
@@ -107,7 +105,7 @@ export class AnimalModule extends ModuleBase {
    * @since 5.5.0
    */
   bird(): string {
-    return this.faker.helpers.arrayElement(this.faker.definitions.animal.bird);
+      throw new Error("STUB");
   }
 
   /**
@@ -119,7 +117,7 @@ export class AnimalModule extends ModuleBase {
    * @since 5.5.0
    */
   cow(): string {
-    return this.faker.helpers.arrayElement(this.faker.definitions.animal.cow);
+      throw new Error("STUB");
   }
 
   /**
@@ -131,7 +129,7 @@ export class AnimalModule extends ModuleBase {
    * @since 5.5.0
    */
   fish(): string {
-    return this.faker.helpers.arrayElement(this.faker.definitions.animal.fish);
+      throw new Error("STUB");
   }
 
   /**
@@ -143,9 +141,7 @@ export class AnimalModule extends ModuleBase {
    * @since 5.5.0
    */
   crocodilia(): string {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.animal.crocodilia
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -157,9 +153,7 @@ export class AnimalModule extends ModuleBase {
    * @since 5.5.0
    */
   insect(): string {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.animal.insect
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -171,9 +165,7 @@ export class AnimalModule extends ModuleBase {
    * @since 5.5.0
    */
   rabbit(): string {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.animal.rabbit
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -185,9 +177,7 @@ export class AnimalModule extends ModuleBase {
    * @since 7.4.0
    */
   rodent(): string {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.animal.rodent
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -199,7 +189,7 @@ export class AnimalModule extends ModuleBase {
    * @since 5.5.0
    */
   type(): string {
-    return this.faker.helpers.arrayElement(this.faker.definitions.animal.type);
+      throw new Error("STUB");
   }
 
   /**
@@ -211,8 +201,6 @@ export class AnimalModule extends ModuleBase {
    * @since 9.2.0
    */
   petName(): string {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.animal.pet_name
-    );
+      throw new Error("STUB");
   }
 }

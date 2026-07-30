@@ -22,16 +22,7 @@ import type { Randomizer } from '../randomizer';
 export function generateMersenne32Randomizer(
   seed: number = randomSeed()
 ): Randomizer {
-  const twister = new MersenneTwister19937(seed);
-
-  return {
-    next(): number {
-      return twister.nextF32();
-    },
-    seed(seed: number | number[]): void {
-      twister.seed(seed);
-    },
-  };
+    throw new Error("STUB");
 }
 
 /**
@@ -54,14 +45,5 @@ export function generateMersenne32Randomizer(
 export function generateMersenne53Randomizer(
   seed: number = randomSeed()
 ): Randomizer {
-  const twister = new MersenneTwister19937(seed);
-
-  return {
-    next(): number {
-      return twister.nextF53();
-    },
-    seed(seed: number | number[]): void {
-      twister.seed(seed);
-    },
-  };
+    throw new Error("STUB");
 }

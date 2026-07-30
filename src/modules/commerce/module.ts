@@ -98,9 +98,7 @@ export class CommerceModule extends ModuleBase {
    * @since 3.0.0
    */
   department(): string {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.commerce.department
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -112,8 +110,7 @@ export class CommerceModule extends ModuleBase {
    * @since 3.0.0
    */
   productName(): string {
-    const patterns = this.faker.definitions.commerce.product_name.pattern;
-    return this.faker.helpers.fake(patterns);
+      throw new Error("STUB");
   }
 
   /**
@@ -169,47 +166,7 @@ export class CommerceModule extends ModuleBase {
       symbol?: string;
     } = {}
   ): string {
-    const { dec = 2, max = 1000, min = 1, symbol = '' } = options;
-
-    if (min < 0 || max < 0) {
-      return `${symbol}0`;
-    }
-
-    if (min === max) {
-      return `${symbol}${min.toFixed(dec)}`;
-    }
-
-    const generated = this.faker.number.float({
-      min,
-      max,
-      fractionDigits: dec,
-    });
-
-    if (dec === 0) {
-      return `${symbol}${generated.toFixed(dec)}`;
-    }
-
-    const oldLastDigit = (generated * 10 ** dec) % 10;
-    const newLastDigit = this.faker.helpers.weightedArrayElement([
-      { weight: 5, value: 9 },
-      { weight: 3, value: 5 },
-      { weight: 1, value: 0 },
-      {
-        weight: 1,
-        value: this.faker.number.int({ min: 0, max: 9 }),
-      },
-    ]);
-
-    const fraction = (1 / 10) ** dec;
-    const oldLastDigitValue = oldLastDigit * fraction;
-    const newLastDigitValue = newLastDigit * fraction;
-    const combined = generated - oldLastDigitValue + newLastDigitValue;
-
-    if (min <= combined && combined <= max) {
-      return `${symbol}${combined.toFixed(dec)}`;
-    }
-
-    return `${symbol}${generated.toFixed(dec)}`;
+      throw new Error("STUB");
   }
 
   /**
@@ -221,9 +178,7 @@ export class CommerceModule extends ModuleBase {
    * @since 3.0.0
    */
   productAdjective(): string {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.commerce.product_name.adjective
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -235,9 +190,7 @@ export class CommerceModule extends ModuleBase {
    * @since 3.0.0
    */
   productMaterial(): string {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.commerce.product_name.material
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -249,9 +202,7 @@ export class CommerceModule extends ModuleBase {
    * @since 3.0.0
    */
   product(): string {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.commerce.product_name.product
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -263,9 +214,7 @@ export class CommerceModule extends ModuleBase {
    * @since 5.0.0
    */
   productDescription(): string {
-    return this.faker.helpers.fake(
-      this.faker.definitions.commerce.product_description
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -308,51 +257,7 @@ export class CommerceModule extends ModuleBase {
           separator?: string;
         } = {}
   ): string {
-    if (typeof options === 'number') {
-      options = { variant: options };
-    }
-
-    const { variant = 13, separator = '-' } = options;
-
-    // eslint-disable-next-line unicorn/no-declarations-before-early-exit
-    const prefix = '978';
-    const [group, groupRules] =
-      this.faker.helpers.objectEntry(ISBN_LENGTH_RULES);
-    const element = this.faker.string.numeric(8);
-    const elementValue = Number.parseInt(element.slice(0, -1));
-
-    const registrantLength = groupRules.find(
-      ([rangeMaximum]) => elementValue <= rangeMaximum
-    )?.[1];
-
-    if (!registrantLength) {
-      // This can only happen if the ISBN_LENGTH_RULES are corrupted
-      throw new FakerError(
-        `Unable to find a registrant length for the group ${group}`
-      );
-    }
-
-    const registrant = element.slice(0, registrantLength);
-    const publication = element.slice(registrantLength);
-
-    const data = [prefix, group, registrant, publication];
-    if (variant === 10) {
-      data.shift();
-    }
-
-    const isbn = data.join('');
-
-    let checksum = 0;
-    for (let i = 0; i < variant - 1; i++) {
-      const weight = variant === 10 ? i + 1 : i % 2 ? 3 : 1;
-      checksum += weight * Number.parseInt(isbn[i]);
-    }
-
-    checksum = variant === 10 ? checksum % 11 : (10 - (checksum % 10)) % 10;
-
-    data.push(checksum === 10 ? 'X' : checksum.toString());
-
-    return data.join(separator);
+      throw new Error("STUB");
   }
 
   /**
@@ -382,23 +287,6 @@ export class CommerceModule extends ModuleBase {
       prefix?: string;
     } = {}
   ): string {
-    const { prefix = '' } = options;
-    if (prefix && /\D/.test(prefix)) {
-      throw new FakerError('Prefix must contain only numeric digits');
-    }
-
-    if (prefix.length > 11) {
-      throw new FakerError('Prefix must be at most 11 numeric digits');
-    }
-
-    const remaining = 11 - prefix.length;
-    const rand = this.faker.string.numeric({
-      length: remaining,
-      allowLeadingZeros: true,
-    });
-
-    const body = `${prefix}${rand}`; // 11 digits
-    const check = calculateUPCCheckDigit(body);
-    return `${body}${check}`; // 12-digit UPC-A
+      throw new Error("STUB");
   }
 }

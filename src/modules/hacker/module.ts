@@ -25,9 +25,7 @@ export class HackerModule extends ModuleBase {
    * @since 2.0.1
    */
   abbreviation(): string {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.hacker.abbreviation
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -65,7 +63,7 @@ export class HackerModule extends ModuleBase {
    * @since 2.0.1
    */
   verb(): string {
-    return this.faker.helpers.arrayElement(this.faker.definitions.hacker.verb);
+      throw new Error("STUB");
   }
 
   /**
@@ -77,9 +75,7 @@ export class HackerModule extends ModuleBase {
    * @since 2.0.1
    */
   ingverb(): string {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.hacker.ingverb
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -92,6 +88,6 @@ export class HackerModule extends ModuleBase {
    * @since 2.0.1
    */
   phrase(): string {
-    return this.faker.helpers.fake(this.faker.definitions.hacker.phrase);
+      throw new Error("STUB");
   }
 }

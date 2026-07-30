@@ -41,12 +41,7 @@ export interface Currency {
  * @param iban The iban to pretty print.
  */
 export function prettyPrintIban(iban: string): string {
-  let pretty = '';
-  for (let i = 0; i < iban.length; i += 4) {
-    pretty += `${iban.substring(i, i + 4)} `;
-  }
-
-  return pretty.trimEnd();
+    throw new Error("STUB");
 }
 
 /**
@@ -153,13 +148,7 @@ export class FinanceModule extends ModuleBase {
           length?: number;
         } = {}
   ): string {
-    if (typeof options === 'number') {
-      options = { length: options };
-    }
-
-    const { length = 8 } = options;
-
-    return this.faker.string.numeric({ length, allowLeadingZeros: true });
+      throw new Error("STUB");
   }
 
   /**
@@ -171,12 +160,7 @@ export class FinanceModule extends ModuleBase {
    * @since 2.0.1
    */
   accountName(): string {
-    return [
-      this.faker.helpers.arrayElement(
-        this.faker.definitions.finance.account_type
-      ),
-      'Account',
-    ].join(' ');
+      throw new Error("STUB");
   }
 
   /**
@@ -188,27 +172,7 @@ export class FinanceModule extends ModuleBase {
    * @since 5.0.0
    */
   routingNumber(): string {
-    const federalReserveRoutingSymbol = this.faker.helpers.arrayElement(
-      this.faker.definitions.finance.federal_reserve_routing_symbol
-    );
-
-    const institutionIdentifier = this.faker.string.numeric({
-      length: 4,
-      allowLeadingZeros: true,
-    });
-
-    const routingNumber = federalReserveRoutingSymbol + institutionIdentifier;
-
-    // Modules 10 straight summation.
-    let sum = 0;
-
-    for (let i = 0; i < routingNumber.length; i += 3) {
-      sum += Number(routingNumber[i]) * 3;
-      sum += Number(routingNumber[i + 1]) * 7;
-      sum += Number(routingNumber[i + 2]) || 0;
-    }
-
-    return `${routingNumber}${Math.ceil(sum / 10) * 10 - sum}`;
+      throw new Error("STUB");
   }
 
   /**
@@ -266,25 +230,7 @@ export class FinanceModule extends ModuleBase {
       autoFormat?: boolean;
     } = {}
   ): string {
-    const {
-      autoFormat = false,
-      dec = 2,
-      max = 1000,
-      min = 0,
-      symbol = '',
-    } = options;
-
-    const randValue = this.faker.number.float({
-      max,
-      min,
-      fractionDigits: dec,
-    });
-
-    const formattedString = autoFormat
-      ? randValue.toLocaleString(undefined, { minimumFractionDigits: dec })
-      : randValue.toFixed(dec);
-
-    return symbol + formattedString;
+      throw new Error("STUB");
   }
 
   /**
@@ -296,9 +242,7 @@ export class FinanceModule extends ModuleBase {
    * @since 2.0.1
    */
   transactionType(): string {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.finance.transaction_type
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -315,9 +259,7 @@ export class FinanceModule extends ModuleBase {
    * @since 8.0.0
    */
   currency(): Currency {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.finance.currency
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -330,7 +272,7 @@ export class FinanceModule extends ModuleBase {
    * @since 2.0.1
    */
   currencyCode(): string {
-    return this.currency().code;
+      throw new Error("STUB");
   }
 
   /**
@@ -342,7 +284,7 @@ export class FinanceModule extends ModuleBase {
    * @since 2.0.1
    */
   currencyName(): string {
-    return this.currency().name;
+      throw new Error("STUB");
   }
 
   /**
@@ -354,12 +296,7 @@ export class FinanceModule extends ModuleBase {
    * @since 2.0.1
    */
   currencySymbol(): string {
-    let symbol: string;
-    do {
-      symbol = this.currency().symbol;
-    } while (symbol.length === 0);
-
-    return symbol;
+      throw new Error("STUB");
   }
 
   /**
@@ -372,7 +309,7 @@ export class FinanceModule extends ModuleBase {
    * @since 9.6.0
    */
   currencyNumericCode(): string {
-    return this.currency().numericCode;
+      throw new Error("STUB");
   }
 
   /**
@@ -405,21 +342,7 @@ export class FinanceModule extends ModuleBase {
       network?: BitcoinNetworkType;
     } = {}
   ): string {
-    const {
-      type = this.faker.helpers.enumValue(BitcoinAddressFamily),
-      network = BitcoinNetwork.Mainnet,
-    } = options;
-    const addressSpec = BitcoinAddressSpecs[type];
-    const addressPrefix = addressSpec.prefix[network];
-    const addressLength = this.faker.number.int(addressSpec.length);
-
-    const address = this.faker.string.alphanumeric({
-      length: addressLength - addressPrefix.length,
-      casing: addressSpec.casing,
-      exclude: addressSpec.exclude,
-    });
-
-    return addressPrefix + address;
+      throw new Error("STUB");
   }
 
   /**
@@ -431,16 +354,7 @@ export class FinanceModule extends ModuleBase {
    * @since 5.0.0
    */
   litecoinAddress(): string {
-    const addressLength = this.faker.number.int({ min: 26, max: 33 });
-
-    const address =
-      this.faker.string.fromCharacters('LM3') +
-      this.faker.string.fromCharacters(
-        '123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ',
-        addressLength - 1
-      );
-
-    return address;
+      throw new Error("STUB");
   }
 
   /**
@@ -529,29 +443,7 @@ export class FinanceModule extends ModuleBase {
           issuer?: string;
         } = {}
   ): string {
-    if (typeof options === 'string') {
-      options = { issuer: options };
-    }
-
-    const { issuer = '' } = options;
-
-    let format: string;
-    const localeFormat = this.faker.definitions.finance.credit_card;
-    const normalizedIssuer = issuer.toLowerCase();
-    if (normalizedIssuer in localeFormat) {
-      format = this.faker.helpers.arrayElement(localeFormat[normalizedIssuer]);
-    } else if (issuer.includes('#')) {
-      // The user chose an optional scheme
-      format = issuer;
-    } else {
-      // Choose a random issuer
-      // Credit cards are in an object structure
-      const formats = this.faker.helpers.objectValue(localeFormat); // There could be multiple formats
-      format = this.faker.helpers.arrayElement(formats);
-    }
-
-    format = format.replaceAll('/', '');
-    return this.faker.helpers.replaceCreditCardSymbols(format);
+      throw new Error("STUB");
   }
 
   /**
@@ -563,7 +455,7 @@ export class FinanceModule extends ModuleBase {
    * @since 5.0.0
    */
   creditCardCVV(): string {
-    return this.faker.string.numeric({ length: 3, allowLeadingZeros: true });
+      throw new Error("STUB");
   }
 
   /**
@@ -575,9 +467,7 @@ export class FinanceModule extends ModuleBase {
    * @since 6.3.0
    */
   creditCardIssuer(): string {
-    return this.faker.helpers.objectKey(
-      this.faker.definitions.finance.credit_card
-    ) as string;
+      throw new Error("STUB");
   }
 
   /**
@@ -678,17 +568,7 @@ export class FinanceModule extends ModuleBase {
           length?: number;
         } = {}
   ): string {
-    if (typeof options === 'number') {
-      options = { length: options };
-    }
-
-    const { length = 4 } = options;
-
-    if (length < 1) {
-      throw new FakerError('minimum length is 1');
-    }
-
-    return this.faker.string.numeric({ length, allowLeadingZeros: true });
+      throw new Error("STUB");
   }
 
   /**
@@ -702,11 +582,7 @@ export class FinanceModule extends ModuleBase {
    * @since 5.0.0
    */
   ethereumAddress(): string {
-    const address = this.faker.string.hexadecimal({
-      length: 40,
-      casing: 'lower',
-    });
-    return address;
+      throw new Error("STUB");
   }
 
   /**
@@ -742,60 +618,7 @@ export class FinanceModule extends ModuleBase {
       countryCode?: string;
     } = {}
   ): string {
-    const { countryCode, formatted = false } = options;
-
-    const ibanFormat = countryCode
-      ? iban.formats.find((f) => f.country === countryCode)
-      : this.faker.helpers.arrayElement(iban.formats);
-
-    if (!ibanFormat) {
-      throw new FakerError(`Country code ${countryCode} not supported.`);
-    }
-
-    let s = '';
-    let count = 0;
-    for (const bban of ibanFormat.bban) {
-      let c = bban.count;
-      count += bban.count;
-      while (c > 0) {
-        if (bban.type === 'a') {
-          s += this.faker.helpers.arrayElement(iban.alpha);
-        } else if (bban.type === 'c') {
-          if (this.faker.datatype.boolean(0.8)) {
-            s += this.faker.number.int(9);
-          } else {
-            s += this.faker.helpers.arrayElement(iban.alpha);
-          }
-        } else {
-          if (c >= 3 && this.faker.datatype.boolean(0.3)) {
-            if (this.faker.datatype.boolean()) {
-              s += this.faker.helpers.arrayElement(iban.pattern100);
-              c -= 2;
-            } else {
-              s += this.faker.helpers.arrayElement(iban.pattern10);
-              c--;
-            }
-          } else {
-            s += this.faker.number.int(9);
-          }
-        }
-
-        c--;
-      }
-
-      s = s.substring(0, count);
-    }
-
-    let checksum: string | number =
-      98 - iban.mod97(iban.toDigitString(`${s}${ibanFormat.country}00`));
-
-    if (checksum < 10) {
-      checksum = `0${checksum}`;
-    }
-
-    const result = `${ibanFormat.country}${checksum}${s}`;
-
-    return formatted ? prettyPrintIban(result) : result;
+      throw new Error("STUB");
   }
 
   /**
@@ -821,24 +644,7 @@ export class FinanceModule extends ModuleBase {
       includeBranchCode?: boolean;
     } = {}
   ): string {
-    const { includeBranchCode = this.faker.datatype.boolean() } = options;
-
-    const bankIdentifier = this.faker.string.alpha({
-      length: 4,
-      casing: 'upper',
-    });
-    const countryCode = this.faker.helpers.arrayElement(iban.iso3166);
-    const locationCode = this.faker.string.alphanumeric({
-      length: 2,
-      casing: 'upper',
-    });
-    const branchCode = includeBranchCode
-      ? this.faker.datatype.boolean()
-        ? this.faker.string.alphanumeric({ length: 3, casing: 'upper' })
-        : 'XXX'
-      : '';
-
-    return `${bankIdentifier}${countryCode}${locationCode}${branchCode}`;
+      throw new Error("STUB");
   }
 
   /**
@@ -851,8 +657,6 @@ export class FinanceModule extends ModuleBase {
    * @since 5.1.0
    */
   transactionDescription(): string {
-    return this.faker.helpers.fake(
-      this.faker.definitions.finance.transaction_description_pattern
-    );
+      throw new Error("STUB");
   }
 }

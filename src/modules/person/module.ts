@@ -39,45 +39,7 @@ function selectDefinition<T>(
   sex: SexType = faker.person.sexType(),
   personEntry: PersonEntryDefinition<T>
 ): T[] {
-  const { generic, female, male } = personEntry;
-
-  if (sex === 'generic') {
-    return (
-      generic ??
-      faker.helpers.arrayElement([female, male]) ??
-      // The last statement should never happen at run time. At this point in time,
-      // the entry will satisfy at least (generic || (female && male)).
-      // TS is not able to infer the type correctly.
-      []
-    );
-  }
-
-  const binary = sex === 'female' ? female : male;
-
-  if (binary != null) {
-    if (generic != null) {
-      return faker.helpers.weightedArrayElement([
-        {
-          weight: 3 * Math.sqrt(binary.length),
-          value: binary,
-        },
-        {
-          weight: Math.sqrt(generic.length),
-          value: generic,
-        },
-      ]);
-    }
-
-    return binary;
-  }
-
-  return (
-    generic ??
-    // The last statement should never happen at run time. At this point in time,
-    // the entry will satisfy at least (generic || (female && male)).
-    // TS is not able to infer the type correctly.
-    []
-  );
+    throw new Error("STUB");
 }
 
 /**
@@ -114,13 +76,7 @@ export class PersonModule extends ModuleBase {
    * @since 8.0.0
    */
   firstName(sex?: SexType): string {
-    return this.faker.helpers.arrayElement(
-      selectDefinition(
-        this.faker,
-        sex,
-        this.faker.definitions.person.first_name
-      )
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -137,17 +93,7 @@ export class PersonModule extends ModuleBase {
    * @since 8.0.0
    */
   lastName(sex?: SexType): string {
-    const patterns = this.faker.definitions.raw.person?.last_name_pattern;
-    if (patterns != null) {
-      const pattern = this.faker.helpers.weightedArrayElement(
-        selectDefinition(this.faker, sex, patterns)
-      );
-      return this.faker.helpers.fake(pattern);
-    }
-
-    return this.faker.helpers.arrayElement(
-      selectDefinition(this.faker, sex, this.faker.definitions.person.last_name)
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -164,13 +110,7 @@ export class PersonModule extends ModuleBase {
    * @since 8.0.0
    */
   middleName(sex?: SexType): string {
-    return this.faker.helpers.arrayElement(
-      selectDefinition(
-        this.faker,
-        sex,
-        this.faker.definitions.person.middle_name
-      )
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -212,24 +152,7 @@ export class PersonModule extends ModuleBase {
       sex?: SexType;
     } = {}
   ): string {
-    const {
-      sex = this.faker.helpers.arrayElement([Sex.Female, Sex.Male]),
-      firstName = this.firstName(sex),
-      lastName = this.lastName(sex),
-    } = options;
-
-    const fullNamePattern: string = this.faker.helpers.weightedArrayElement(
-      this.faker.definitions.person.name
-    );
-
-    const fullName = this.faker.helpers.mustache(fullNamePattern, {
-      'person.prefix': () => this.prefix(sex),
-      'person.firstName': () => firstName,
-      'person.middleName': () => this.middleName(sex),
-      'person.lastName': () => lastName,
-      'person.suffix': () => this.suffix(),
-    });
-    return fullName;
+      throw new Error("STUB");
   }
 
   /**
@@ -243,9 +166,7 @@ export class PersonModule extends ModuleBase {
    * @since 8.0.0
    */
   gender(): string {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.person.gender
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -263,7 +184,7 @@ export class PersonModule extends ModuleBase {
    * @since 8.0.0
    */
   sex(): string {
-    return this.faker.helpers.arrayElement(this.faker.definitions.person.sex);
+      throw new Error("STUB");
   }
 
   /**
@@ -294,13 +215,7 @@ export class PersonModule extends ModuleBase {
       includeGeneric?: boolean;
     } = {}
   ): SexType {
-    const { includeGeneric = false } = options;
-
-    if (includeGeneric) {
-      return this.faker.helpers.enumValue(Sex);
-    }
-
-    return this.faker.helpers.arrayElement([Sex.Female, Sex.Male]);
+      throw new Error("STUB");
   }
 
   /**
@@ -312,7 +227,7 @@ export class PersonModule extends ModuleBase {
    * @since 8.0.0
    */
   bio(): string {
-    return this.faker.helpers.fake(this.faker.definitions.person.bio_pattern);
+      throw new Error("STUB");
   }
 
   /**
@@ -328,9 +243,7 @@ export class PersonModule extends ModuleBase {
    * @since 8.0.0
    */
   prefix(sex?: SexType): string {
-    return this.faker.helpers.arrayElement(
-      selectDefinition(this.faker, sex, this.faker.definitions.person.prefix)
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -342,10 +255,7 @@ export class PersonModule extends ModuleBase {
    * @since 8.0.0
    */
   suffix(): string {
-    // TODO @Shinigami92 2022-03-21: Add female_suffix and male_suffix
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.person.suffix
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -357,9 +267,7 @@ export class PersonModule extends ModuleBase {
    * @since 8.0.0
    */
   jobTitle(): string {
-    return this.faker.helpers.fake(
-      this.faker.definitions.person.job_title_pattern
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -371,9 +279,7 @@ export class PersonModule extends ModuleBase {
    * @since 8.0.0
    */
   jobDescriptor(): string {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.person.job_descriptor
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -385,9 +291,7 @@ export class PersonModule extends ModuleBase {
    * @since 8.0.0
    */
   jobArea(): string {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.person.job_area
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -399,9 +303,7 @@ export class PersonModule extends ModuleBase {
    * @since 8.0.0
    */
   jobType(): string {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.person.job_type
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -413,8 +315,6 @@ export class PersonModule extends ModuleBase {
    * @since 8.0.0
    */
   zodiacSign(): string {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.person.western_zodiac_sign
-    );
+      throw new Error("STUB");
   }
 }

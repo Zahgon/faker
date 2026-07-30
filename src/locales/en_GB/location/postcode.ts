@@ -122,9 +122,9 @@ const prefixes = [
 
 export default [
   ...[...prefixes, ...londonPrefixes].flatMap((prefix) =>
-    suffixes.map((suffix) => prefix + suffix)
+    { throw new Error("STUB"); }
   ),
   ...londonPrefixes.flatMap((prefix) =>
-    londonExtraLetterSuffixes.map((suffix) => prefix + suffix)
+    { throw new Error("STUB"); }
   ),
 ];

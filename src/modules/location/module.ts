@@ -64,9 +64,7 @@ export class SimpleLocationModule extends SimpleModuleBase {
       precision?: number;
     } = {}
   ): number {
-    const { max = 90, min = -90, precision = 4 } = options;
-
-    return this.faker.number.float({ min, max, fractionDigits: precision });
+      throw new Error("STUB");
   }
 
   /**
@@ -107,9 +105,7 @@ export class SimpleLocationModule extends SimpleModuleBase {
       precision?: number;
     } = {}
   ): number {
-    const { max = 180, min = -180, precision = 4 } = options;
-
-    return this.faker.number.float({ max, min, fractionDigits: precision });
+      throw new Error("STUB");
   }
 
   /**
@@ -148,49 +144,7 @@ export class SimpleLocationModule extends SimpleModuleBase {
       isMetric?: boolean;
     } = {}
   ): [latitude: number, longitude: number] {
-    const { origin, radius = 10, isMetric = false } = options;
-
-    // If there is no origin, the best we can do is return a random GPS coordinate.
-    if (origin == null) {
-      return [this.latitude(), this.longitude()];
-    }
-
-    const angleRadians = this.faker.number.float({
-      max: 2 * Math.PI,
-      fractionDigits: 5,
-    }); // in ° radians
-
-    const radiusMetric = isMetric ? radius : radius * 1.60934; // in km
-    const errorCorrection = 0.995; // avoid float issues
-    const distanceInKm =
-      this.faker.number.float({
-        max: radiusMetric,
-        fractionDigits: 3,
-      }) * errorCorrection; // in km
-
-    /**
-     * The distance in km per degree for earth.
-     */
-    const kmPerDegree = 40_000 / 360; // in km/°
-
-    const distanceInDegree = distanceInKm / kmPerDegree; // in °
-
-    const coordinate: [latitude: number, longitude: number] = [
-      origin[0] + Math.sin(angleRadians) * distanceInDegree,
-      origin[1] + Math.cos(angleRadians) * distanceInDegree,
-    ];
-
-    // Box latitude [-90°, 90°]
-    coordinate[0] %= 180;
-    if (Math.abs(coordinate[0]) > 90) {
-      coordinate[0] = Math.sign(coordinate[0]) * 180 - coordinate[0];
-      coordinate[1] += 180;
-    }
-
-    // Box longitude [-180°, 180°]
-    coordinate[1] = (((coordinate[1] % 360) + 540) % 360) - 180;
-
-    return [coordinate[0], coordinate[1]];
+      throw new Error("STUB");
   }
 }
 
@@ -249,33 +203,7 @@ export class LocationModule extends SimpleLocationModule {
           format?: string;
         } = {}
   ): string {
-    if (typeof options === 'string') {
-      options = { format: options };
-    }
-
-    const { state } = options;
-
-    if (state != null) {
-      const zipPattern =
-        this.faker.definitions.location.postcode_by_state[state];
-
-      if (zipPattern == null) {
-        throw new FakerError(
-          `No zip code definition found for state "${state}"`
-        );
-      }
-
-      return this.faker.helpers.fake(zipPattern);
-    }
-
-    let { format = this.faker.definitions.location.postcode } = options;
-    if (typeof format === 'string') {
-      format = [format];
-    }
-
-    format = this.faker.helpers.arrayElement(format);
-
-    return this.faker.helpers.replaceSymbols(format);
+      throw new Error("STUB");
   }
 
   /**
@@ -288,9 +216,7 @@ export class LocationModule extends SimpleLocationModule {
    * @since 8.0.0
    */
   city(): string {
-    return this.faker.helpers.fake(
-      this.faker.definitions.location.city_pattern
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -302,14 +228,7 @@ export class LocationModule extends SimpleLocationModule {
    * @since 8.0.0
    */
   buildingNumber(): string {
-    return this.faker.helpers
-      .arrayElement(this.faker.definitions.location.building_number)
-      .replaceAll(/#+/g, (m) =>
-        this.faker.string.numeric({
-          length: m.length,
-          allowLeadingZeros: false,
-        })
-      );
+      throw new Error("STUB");
   }
 
   /**
@@ -321,9 +240,7 @@ export class LocationModule extends SimpleLocationModule {
    * @since 8.0.0
    */
   street(): string {
-    return this.faker.helpers.fake(
-      this.faker.definitions.location.street_pattern
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -352,16 +269,7 @@ export class LocationModule extends SimpleLocationModule {
           useFullAddress?: boolean;
         } = {}
   ): string {
-    if (typeof options === 'boolean') {
-      options = { useFullAddress: options };
-    }
-
-    const { useFullAddress } = options;
-
-    const formats = this.faker.definitions.location.street_address;
-    const format = formats[useFullAddress ? 'full' : 'normal'];
-
-    return this.faker.helpers.fake(format);
+      throw new Error("STUB");
   }
 
   /**
@@ -391,9 +299,7 @@ export class LocationModule extends SimpleLocationModule {
    * @since 10.5.0
    */
   postalAddress(): string {
-    return this.faker.helpers.fake(
-      this.faker.definitions.location.postal_address
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -406,14 +312,7 @@ export class LocationModule extends SimpleLocationModule {
    * @since 8.0.0
    */
   secondaryAddress(): string {
-    return this.faker.helpers
-      .fake(this.faker.definitions.location.secondary_address)
-      .replaceAll(/#+/g, (m) =>
-        this.faker.string.numeric({
-          length: m.length,
-          allowLeadingZeros: false,
-        })
-      );
+      throw new Error("STUB");
   }
 
   /**
@@ -426,9 +325,7 @@ export class LocationModule extends SimpleLocationModule {
    * @since 8.0.0
    */
   county(): string {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.location.county
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -440,9 +337,7 @@ export class LocationModule extends SimpleLocationModule {
    * @since 8.0.0
    */
   country(): string {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.location.country
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -454,9 +349,7 @@ export class LocationModule extends SimpleLocationModule {
    * @since 9.1.0
    */
   continent(): string {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.location.continent
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -496,30 +389,7 @@ export class LocationModule extends SimpleLocationModule {
           variant?: 'alpha-2' | 'alpha-3' | 'numeric';
         } = {}
   ): string {
-    if (typeof options === 'string') {
-      options = { variant: options };
-    }
-
-    const { variant = 'alpha-2' } = options;
-    const key = (() => {
-      switch (variant) {
-        case 'numeric': {
-          return 'numeric';
-        }
-
-        case 'alpha-3': {
-          return 'alpha3';
-        }
-
-        case 'alpha-2': {
-          return 'alpha2';
-        }
-      }
-    })();
-
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.location.country_code
-    )[key];
+      throw new Error("STUB");
   }
 
   /**
@@ -551,12 +421,7 @@ export class LocationModule extends SimpleLocationModule {
       abbreviated?: boolean;
     } = {}
   ): string {
-    const { abbreviated = false } = options;
-    const data = abbreviated
-      ? this.faker.definitions.location.state_abbr
-      : this.faker.definitions.location.state;
-
-    return this.faker.helpers.arrayElement(data);
+      throw new Error("STUB");
   }
 
   /**
@@ -583,13 +448,7 @@ export class LocationModule extends SimpleLocationModule {
       abbreviated?: boolean;
     } = {}
   ): string {
-    const { abbreviated = false } = options;
-    const direction = this.faker.definitions.location.direction;
-    const data = abbreviated
-      ? [...direction.cardinal_abbr, ...direction.ordinal_abbr]
-      : [...direction.cardinal, ...direction.ordinal];
-
-    return this.faker.helpers.arrayElement(data);
+      throw new Error("STUB");
   }
 
   /**
@@ -616,11 +475,7 @@ export class LocationModule extends SimpleLocationModule {
       abbreviated?: boolean;
     } = {}
   ): string {
-    const { abbreviated = false } = options;
-    const direction = this.faker.definitions.location.direction;
-    const data = abbreviated ? direction.cardinal_abbr : direction.cardinal;
-
-    return this.faker.helpers.arrayElement(data);
+      throw new Error("STUB");
   }
 
   /**
@@ -647,11 +502,7 @@ export class LocationModule extends SimpleLocationModule {
       abbreviated?: boolean;
     } = {}
   ): string {
-    const { abbreviated = false } = options;
-    const direction = this.faker.definitions.location.direction;
-    const data = abbreviated ? direction.ordinal_abbr : direction.ordinal;
-
-    return this.faker.helpers.arrayElement(data);
+      throw new Error("STUB");
   }
 
   /**
@@ -668,9 +519,7 @@ export class LocationModule extends SimpleLocationModule {
    * @since 8.0.0
    */
   timeZone(): string {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.location.time_zone
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -689,8 +538,6 @@ export class LocationModule extends SimpleLocationModule {
    * @since 9.4.0
    */
   language(): Language {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.location.language
-    );
+      throw new Error("STUB");
   }
 }

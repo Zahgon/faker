@@ -61,22 +61,7 @@ export class SystemModule extends ModuleBase {
       extensionCount?: NumberOrRange;
     } = {}
   ): string {
-    const { extensionCount = 1 } = options;
-
-    const baseName = this.faker.word
-      .words()
-      .toLowerCase()
-      .replaceAll(/\W/g, '_');
-
-    const extensionsSuffix = this.faker.helpers
-      .multiple(() => this.fileExt(), { count: extensionCount })
-      .join('.');
-
-    if (extensionsSuffix.length === 0) {
-      return baseName;
-    }
-
-    return `${baseName}.${extensionsSuffix}`;
+      throw new Error("STUB");
   }
 
   /**
@@ -91,9 +76,7 @@ export class SystemModule extends ModuleBase {
    * @since 3.1.0
    */
   commonFileName(extension?: string): string {
-    const fileName = this.fileName({ extensionCount: 0 });
-
-    return `${fileName}.${extension || this.commonFileExt()}`;
+      throw new Error("STUB");
   }
 
   /**
@@ -105,9 +88,7 @@ export class SystemModule extends ModuleBase {
    * @since 3.1.0
    */
   mimeType(): string {
-    const mimeTypeKeys = Object.keys(this.faker.definitions.system.mime_type);
-
-    return this.faker.helpers.arrayElement(mimeTypeKeys);
+      throw new Error("STUB");
   }
 
   /**
@@ -119,7 +100,7 @@ export class SystemModule extends ModuleBase {
    * @since 3.1.0
    */
   commonFileType(): string {
-    return this.faker.helpers.arrayElement(commonFileTypes);
+      throw new Error("STUB");
   }
 
   /**
@@ -131,7 +112,7 @@ export class SystemModule extends ModuleBase {
    * @since 3.1.0
    */
   commonFileExt(): string {
-    return this.fileExt(this.faker.helpers.arrayElement(commonMimeTypes));
+      throw new Error("STUB");
   }
 
   /**
@@ -143,12 +124,7 @@ export class SystemModule extends ModuleBase {
    * @since 3.1.0
    */
   fileType(): string {
-    const mimeTypes = this.faker.definitions.system.mime_type;
-
-    const typeSet = new Set(
-      Object.keys(mimeTypes).map((key) => key.split('/', 1)[0])
-    );
-    return this.faker.helpers.arrayElement([...typeSet]);
+      throw new Error("STUB");
   }
 
   /**
@@ -163,21 +139,7 @@ export class SystemModule extends ModuleBase {
    * @since 3.1.0
    */
   fileExt(mimeType?: string): string {
-    const mimeTypes = this.faker.definitions.system.mime_type;
-
-    if (typeof mimeType === 'string') {
-      const entry = mimeTypes[mimeType];
-      if (entry == null) {
-        throw new FakerError(`MIME type ${mimeType} is not supported.`);
-      }
-
-      return this.faker.helpers.arrayElement(entry.extensions);
-    }
-
-    const extensionSet = new Set(
-      Object.values(mimeTypes).flatMap(({ extensions }) => extensions)
-    );
-    return this.faker.helpers.arrayElement([...extensionSet]);
+      throw new Error("STUB");
   }
 
   /**
@@ -189,8 +151,7 @@ export class SystemModule extends ModuleBase {
    * @since 3.1.0
    */
   directoryPath(): string {
-    const paths = this.faker.definitions.system.directory_path;
-    return this.faker.helpers.arrayElement(paths);
+      throw new Error("STUB");
   }
 
   /**
@@ -202,7 +163,7 @@ export class SystemModule extends ModuleBase {
    * @since 3.1.0
    */
   filePath(): string {
-    return `${this.directoryPath()}/${this.fileName()}`;
+      throw new Error("STUB");
   }
 
   /**
@@ -214,11 +175,7 @@ export class SystemModule extends ModuleBase {
    * @since 3.1.0
    */
   semver(): string {
-    return [
-      this.faker.number.int(9),
-      this.faker.number.int(20),
-      this.faker.number.int(20),
-    ].join('.');
+      throw new Error("STUB");
   }
 
   /**
@@ -252,45 +209,7 @@ export class SystemModule extends ModuleBase {
       interfaceSchema?: keyof typeof commonInterfaceSchemas;
     } = {}
   ): string {
-    const {
-      interfaceType = this.faker.helpers.arrayElement(commonInterfaceTypes),
-      interfaceSchema = this.faker.helpers.objectKey(commonInterfaceSchemas),
-    } = options;
-
-    let suffix: string;
-    let prefix = '';
-    switch (interfaceSchema) {
-      case 'index': {
-        suffix = this.faker.string.numeric();
-        break;
-      }
-
-      case 'slot': {
-        suffix = `${this.faker.string.numeric()}${
-          this.faker.helpers.maybe(() => `f${this.faker.string.numeric()}`) ??
-          ''
-        }${this.faker.helpers.maybe(() => `d${this.faker.string.numeric()}`) ?? ''}`;
-        break;
-      }
-
-      case 'mac': {
-        suffix = this.faker.internet.mac('');
-        break;
-      }
-
-      case 'pci': {
-        prefix =
-          this.faker.helpers.maybe(() => `P${this.faker.string.numeric()}`) ??
-          '';
-        suffix = `${this.faker.string.numeric()}s${this.faker.string.numeric()}${
-          this.faker.helpers.maybe(() => `f${this.faker.string.numeric()}`) ??
-          ''
-        }${this.faker.helpers.maybe(() => `d${this.faker.string.numeric()}`) ?? ''}`;
-        break;
-      }
-    }
-
-    return `${prefix}${interfaceType}${commonInterfaceSchemas[interfaceSchema]}${suffix}`;
+      throw new Error("STUB");
   }
 
   /**
@@ -325,46 +244,6 @@ export class SystemModule extends ModuleBase {
       includeNonStandard?: boolean;
     } = {}
   ): string {
-    const { includeYear = false, includeNonStandard = false } = options;
-
-    // create the arrays to hold the available values for each component of the expression
-    const minutes = [this.faker.number.int(59), '*'];
-    const hours = [this.faker.number.int(23), '*'];
-    const days = [this.faker.number.int({ min: 1, max: 31 }), '*', '?'];
-    const months = [this.faker.number.int({ min: 1, max: 12 }), '*'];
-    const daysOfWeek = [
-      this.faker.number.int(6),
-      this.faker.helpers.arrayElement(CRON_DAY_OF_WEEK),
-      '*',
-      '?',
-    ];
-    const years = [this.faker.number.int({ min: 1970, max: 2099 }), '*'];
-
-    const minute = this.faker.helpers.arrayElement(minutes);
-    const hour = this.faker.helpers.arrayElement(hours);
-    const day = this.faker.helpers.arrayElement(days);
-    const month = this.faker.helpers.arrayElement(months);
-    const dayOfWeek = this.faker.helpers.arrayElement(daysOfWeek);
-    const year = this.faker.helpers.arrayElement(years);
-
-    // create and return the cron expression string
-    let standardExpression = `${minute} ${hour} ${day} ${month} ${dayOfWeek}`;
-    if (includeYear) {
-      standardExpression += ` ${year}`;
-    }
-
-    const nonStandardExpressions = [
-      '@annually',
-      '@daily',
-      '@hourly',
-      '@monthly',
-      '@reboot',
-      '@weekly',
-      '@yearly',
-    ];
-
-    return !includeNonStandard || this.faker.datatype.boolean()
-      ? standardExpression
-      : this.faker.helpers.arrayElement(nonStandardExpressions);
+      throw new Error("STUB");
   }
 }

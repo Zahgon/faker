@@ -42,7 +42,7 @@ export class SimpleFaker {
    * Gets a new reference date used to generate relative dates.
    */
   get defaultRefDate(): () => Date {
-    return () => utilsGetDefaultRefDate(this.fakerCore);
+      throw new Error("STUB");
   }
 
   /**
@@ -79,9 +79,9 @@ export class SimpleFaker {
    * @since 8.0.0
    */
   setDefaultRefDate(
-    dateOrSource: string | Date | number | (() => Date) = () => new Date()
+    dateOrSource: string | Date | number | (() => Date) = () => { throw new Error("STUB"); }
   ): void {
-    utilsSetDefaultRefDate(this.fakerCore, dateOrSource);
+      throw new Error("STUB");
   }
 
   readonly datatype: DatatypeModule = new DatatypeModule(this);
@@ -244,9 +244,7 @@ export class SimpleFaker {
    */
   seed(seed?: number | number[]): number | number[];
   seed(seed: number | number[] = randomSeed()): number | number[] {
-    this.fakerCore.randomizer.seed(seed);
-
-    return seed;
+      throw new Error("STUB");
   }
 }
 

@@ -88,22 +88,5 @@ export interface FakerOptions {
  * @since 10.5.0
  */
 export function createFakerCore(options: FakerOptions = {}): FakerCore {
-  const {
-    locale = {},
-    randomizer = generateMersenne53Randomizer(),
-    config = {},
-    seed,
-  } = options;
-
-  if (randomizer != null && seed != null) {
-    randomizer.seed(seed);
-  }
-
-  return {
-    locale: createLocaleProxy(
-      Array.isArray(locale) ? mergeLocales(locale) : locale
-    ),
-    randomizer,
-    config,
-  };
+    throw new Error("STUB");
 }

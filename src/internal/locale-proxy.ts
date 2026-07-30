@@ -31,7 +31,7 @@ type LocaleProxyCategory<T> = Readonly<{
 type LocaleProxyEntry<T> = unknown extends T ? T : Readonly<NonNullable<T>>;
 
 const throwReadOnlyError: () => never = () => {
-  throw new FakerError('You cannot edit the locale data on the faker instance');
+    throw new Error("STUB");
 };
 
 /**
@@ -42,12 +42,7 @@ const throwReadOnlyError: () => never = () => {
  * @returns True if the value is a LocaleProxy, false otherwise.
  */
 function isLocaleProxy(value: unknown): value is LocaleProxy {
-  return (
-    value != null &&
-    typeof value === 'object' &&
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (value as any)?.[LOCALE_PROXY_TAG] === true
-  );
+    throw new Error("STUB");
 }
 
 /**
@@ -58,42 +53,7 @@ function isLocaleProxy(value: unknown): value is LocaleProxy {
 export function createLocaleProxy(
   locale: LocaleDefinition | LocaleProxy
 ): LocaleProxy {
-  if (isLocaleProxy(locale)) {
-    return locale;
-  }
-
-  const proxies = { raw: locale } as LocaleDefinition;
-  return new Proxy(locale, {
-    has(): true {
-      // Categories are always present (proxied), that's why we return true.
-      return true;
-    },
-
-    get(
-      target: LocaleDefinition,
-      categoryName: keyof LocaleProxy
-    ): LocaleProxy[keyof LocaleProxy] {
-      if (typeof categoryName === 'symbol') {
-        if (categoryName === LOCALE_PROXY_TAG) {
-          return true;
-        }
-
-        return target[categoryName];
-      }
-
-      if (categoryName === 'nodeType') {
-        return target[categoryName];
-      }
-
-      return (proxies[categoryName] ??= createCategoryProxy(
-        categoryName,
-        target[categoryName]
-      ));
-    },
-
-    set: throwReadOnlyError,
-    deleteProperty: throwReadOnlyError,
-  }) as unknown as LocaleProxy;
+    throw new Error("STUB");
 }
 
 /**

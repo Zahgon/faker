@@ -26,7 +26,7 @@ export class BookModule extends ModuleBase {
    * @since 9.1.0
    */
   author(): string {
-    return this.faker.helpers.arrayElement(this.faker.definitions.book.author);
+      throw new Error("STUB");
   }
 
   /**
@@ -50,7 +50,7 @@ export class BookModule extends ModuleBase {
    * @since 9.1.0
    */
   genre(): string {
-    return this.faker.helpers.arrayElement(this.faker.definitions.book.genre);
+      throw new Error("STUB");
   }
 
   /**
@@ -62,9 +62,7 @@ export class BookModule extends ModuleBase {
    * @since 9.1.0
    */
   publisher(): string {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.book.publisher
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -76,7 +74,7 @@ export class BookModule extends ModuleBase {
    * @since 9.1.0
    */
   series(): string {
-    return this.faker.helpers.arrayElement(this.faker.definitions.book.series);
+      throw new Error("STUB");
   }
 
   /**
@@ -88,6 +86,6 @@ export class BookModule extends ModuleBase {
    * @since 9.1.0
    */
   title(): string {
-    return this.faker.helpers.arrayElement(this.faker.definitions.book.title);
+      throw new Error("STUB");
   }
 }

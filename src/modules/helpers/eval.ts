@@ -69,40 +69,7 @@ export function fakeEval(
   faker: Faker,
   entrypoints: ReadonlyArray<unknown> = [faker, faker.definitions.raw]
 ): unknown {
-  if (expression.length === 0) {
-    throw new FakerError('Eval expression cannot be empty.');
-  }
-
-  if (entrypoints.length === 0) {
-    throw new FakerError('Eval entrypoints cannot be empty.');
-  }
-
-  let current = entrypoints;
-  let remaining = expression;
-  do {
-    let index: number;
-    if (remaining.startsWith('(')) {
-      [index, current] = evalProcessFunction(remaining, current);
-    } else {
-      [index, current] = evalProcessExpression(remaining, current);
-    }
-
-    remaining = remaining.substring(index);
-
-    // Remove garbage and resolve array values
-    current = current
-      .filter((value) => value != null)
-      .map((value): unknown =>
-        Array.isArray(value) ? faker.helpers.arrayElement(value) : value
-      );
-  } while (remaining.length > 0 && current.length > 0);
-
-  if (current.length === 0) {
-    throw new FakerError(`Cannot resolve expression '${expression}'`);
-  }
-
-  const value = current[0];
-  return typeof value === 'function' ? value() : value;
+    throw new Error("STUB");
 }
 
 /**
@@ -115,28 +82,7 @@ function evalProcessFunction(
   input: string,
   entrypoints: ReadonlyArray<unknown>
 ): [continueIndex: number, mapped: unknown[]] {
-  const [index, params] = findParams(input);
-  const nextChar = input[index + 1];
-  switch (nextChar) {
-    case '.':
-    case '(':
-    case undefined: {
-      break; // valid
-    }
-
-    default: {
-      throw new FakerError(
-        `Expected dot ('.'), open parenthesis ('('), or nothing after function call but got '${nextChar}'`
-      );
-    }
-  }
-
-  return [
-    index + (nextChar === '.' ? 2 : 1), // one for the closing bracket, one for the dot
-    entrypoints.map((entrypoint): unknown =>
-      typeof entrypoint === 'function' ? entrypoint(...params) : undefined
-    ),
-  ];
+    throw new Error("STUB");
 }
 
 /**
@@ -145,33 +91,7 @@ function evalProcessFunction(
  * @param input The input string to parse.
  */
 function findParams(input: string): [continueIndex: number, params: unknown[]] {
-  let index = input.indexOf(')', 1);
-  if (index === -1) {
-    throw new FakerError(`Missing closing parenthesis in '${input}'`);
-  }
-
-  while (index !== -1) {
-    const params = input.substring(1, index);
-    try {
-      // assuming that the params are valid JSON
-      return [index, JSON.parse(`[${params}]`) as unknown[]];
-    } catch {
-      if (!params.includes("'") && !params.includes('"')) {
-        try {
-          // assuming that the params are a single unquoted string
-          return [index, JSON.parse(`["${params}"]`) as unknown[]];
-        } catch {
-          // try again with the next index
-        }
-      }
-    }
-
-    index = input.indexOf(')', index + 1);
-  }
-
-  index = input.lastIndexOf(')');
-  const params = input.substring(1, index);
-  return [index, [params]];
+    throw new Error("STUB");
 }
 
 /**
@@ -184,23 +104,7 @@ function evalProcessExpression(
   input: string,
   entrypoints: ReadonlyArray<unknown>
 ): [continueIndex: number, mapped: unknown[]] {
-  const result = REGEX_DOT_OR_BRACKET.exec(input);
-  const dotMatch = (result?.[0] ?? '') === '.';
-  const index = result?.index ?? input.length;
-  const key = input.substring(0, index);
-  if (key.length === 0) {
-    throw new FakerError(`Expression parts cannot be empty in '${input}'`);
-  }
-
-  const next = input[index + 1];
-  if (dotMatch && (next == null || next === '.' || next === '(')) {
-    throw new FakerError(`Found dot without property name in '${input}'`);
-  }
-
-  return [
-    index + (dotMatch ? 1 : 0),
-    entrypoints.map((entrypoint) => resolveProperty(entrypoint, key)),
-  ];
+    throw new Error("STUB");
 }
 
 /**
@@ -210,23 +114,5 @@ function evalProcessExpression(
  * @param key The property name to resolve.
  */
 function resolveProperty(entrypoint: unknown, key: string): unknown {
-  switch (typeof entrypoint) {
-    case 'function': {
-      try {
-        entrypoint = entrypoint();
-      } catch {
-        return undefined;
-      }
-
-      return resolveProperty(entrypoint, key);
-    }
-
-    case 'object': {
-      return entrypoint?.[key as keyof typeof entrypoint];
-    }
-
-    default: {
-      return undefined;
-    }
-  }
+    throw new Error("STUB");
 }

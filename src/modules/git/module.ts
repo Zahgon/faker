@@ -19,9 +19,7 @@ export class GitModule extends ModuleBase {
    * @since 5.0.0
    */
   branch(): string {
-    const noun = this.faker.hacker.noun().replace(' ', '-');
-    const verb = this.faker.hacker.verb().replace(' ', '-');
-    return `${noun}-${verb}`;
+      throw new Error("STUB");
   }
 
   /**
@@ -69,45 +67,7 @@ export class GitModule extends ModuleBase {
       refDate?: string | Date | number;
     } = {}
   ): string {
-    const {
-      merge = this.faker.datatype.boolean({ probability: 0.2 }),
-      eol = 'CRLF',
-      refDate,
-    } = options;
-
-    const lines = [`commit ${this.faker.git.commitSha()}`];
-
-    if (merge) {
-      lines.push(
-        `Merge: ${this.commitSha({ length: 7 })} ${this.commitSha({
-          length: 7,
-        })}`
-      );
-    }
-
-    const firstName = this.faker.person.firstName();
-    const lastName = this.faker.person.lastName();
-    const fullName = this.faker.person.fullName({ firstName, lastName });
-    const username = this.faker.internet.username({ firstName, lastName });
-    let user = this.faker.helpers.arrayElement([fullName, username]);
-    const email = this.faker.internet.email({ firstName, lastName });
-
-    // Normalize user according to https://github.com/libgit2/libgit2/issues/5342
-    user = user.replaceAll(/^[.,:;"\\']|[<>\n]|[.,:;"\\']$/g, '');
-
-    lines.push(
-      `Author: ${user} <${email}>`,
-      `Date: ${this.commitDate({ refDate })}`,
-      '',
-      `${nbsp.repeat(4)}${this.commitMessage()}`,
-      // to end with a eol char
-      ''
-    );
-
-    const eolChar = eol === 'CRLF' ? '\r\n' : '\n';
-    const entry = lines.join(eolChar);
-
-    return entry;
+      throw new Error("STUB");
   }
 
   /**
@@ -119,7 +79,7 @@ export class GitModule extends ModuleBase {
    * @since 5.0.0
    */
   commitMessage(): string {
-    return `${this.faker.hacker.verb()} ${this.faker.hacker.adjective()} ${this.faker.hacker.noun()}`;
+      throw new Error("STUB");
   }
 
   /**
@@ -144,39 +104,7 @@ export class GitModule extends ModuleBase {
       refDate?: string | Date | number;
     } = {}
   ): string {
-    const { refDate = this.faker.defaultRefDate() } = options;
-    // Git uses a non-standard date format for commits by default per https://mirrors.edge.kernel.org/pub/software/scm/git/docs/git-log.html
-    // --date=default is the default format, and is based on ctime(3) output. It shows a single line with three-letter day of the week, three-letter month, day-of-month, hour-minute-seconds in "HH:MM:SS" format, followed by 4-digit year, plus timezone information, unless the local time zone is used, e.g. Thu Jan 1 00:00:00 1970 +0000.
-    // To avoid relying on the Intl global which may not be available in all environments, we implement a custom date format using built-in Javascript date functions.
-    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    const months = [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec',
-    ];
-
-    const date = this.faker.date.recent({ days: 1, refDate });
-    const day = days[date.getUTCDay()];
-    const month = months[date.getUTCMonth()];
-    const dayOfMonth = date.getUTCDate();
-    const hours = date.getUTCHours().toString().padStart(2, '0');
-    const minutes = date.getUTCMinutes().toString().padStart(2, '0');
-    const seconds = date.getUTCSeconds().toString().padStart(2, '0');
-    const year = date.getUTCFullYear();
-    const timezone = this.faker.number.int({ min: -11, max: 12 });
-    const timezoneHours = Math.abs(timezone).toString().padStart(2, '0');
-    const timezoneMinutes = '00';
-    const timezoneSign = timezone >= 0 ? '+' : '-';
-    return `${day} ${month} ${dayOfMonth} ${hours}:${minutes}:${seconds} ${year} ${timezoneSign}${timezoneHours}${timezoneMinutes}`;
+      throw new Error("STUB");
   }
 
   /**
@@ -210,11 +138,6 @@ export class GitModule extends ModuleBase {
       length?: number;
     } = {}
   ): string {
-    const { length = 40 } = options;
-    return this.faker.string.hexadecimal({
-      length,
-      casing: 'lower',
-      prefix: '',
-    });
+      throw new Error("STUB");
   }
 }

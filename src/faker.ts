@@ -82,11 +82,11 @@ export class Faker extends SimpleFaker {
   readonly word: WordModule = new WordModule(this);
 
   get rawDefinitions(): LocaleDefinition {
-    return this.fakerCore.locale.raw;
+      throw new Error("STUB");
   }
 
   get definitions(): LocaleProxy {
-    return this.fakerCore.locale;
+      throw new Error("STUB");
   }
 
   /**
@@ -126,17 +126,7 @@ export class Faker extends SimpleFaker {
    * @since 8.0.0
    */
   constructor(options: FakerOptions) {
-    super(options);
-
-    const { locale } = options;
-
-    // TODO @ST-DDT 2026-03-08: We should either not throw or throw consistently when locale data are empty.
-    // And likely refer to simpleFaker as alternative
-    if (Array.isArray(locale) && locale.length === 0) {
-      throw new FakerError(
-        'The locale option must contain at least one locale definition.'
-      );
-    }
+      throw new Error("STUB");
   }
 
   /**
@@ -151,6 +141,6 @@ export class Faker extends SimpleFaker {
    * @since 8.1.0
    */
   getMetadata(): MetadataDefinition {
-    return this.fakerCore.locale.raw.metadata ?? {};
+      throw new Error("STUB");
   }
 }

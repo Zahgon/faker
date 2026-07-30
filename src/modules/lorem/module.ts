@@ -92,9 +92,7 @@ export class LoremModule extends ModuleBase {
    * @since 2.0.1
    */
   words(wordCount: NumberOrRange = 3): string {
-    return this.faker.helpers
-      .multiple(() => this.word(), { count: wordCount })
-      .join(' ');
+      throw new Error("STUB");
   }
 
   /**
@@ -112,8 +110,7 @@ export class LoremModule extends ModuleBase {
    * @since 2.0.1
    */
   sentence(wordCount: NumberOrRange = { min: 3, max: 10 }): string {
-    const sentence = this.words(wordCount);
-    return `${sentence.charAt(0).toUpperCase() + sentence.substring(1)}.`;
+      throw new Error("STUB");
   }
 
   /**
@@ -131,8 +128,7 @@ export class LoremModule extends ModuleBase {
    * @since 4.0.0
    */
   slug(wordCount: NumberOrRange = 3): string {
-    const words = this.words(wordCount);
-    return this.faker.helpers.slugify(words);
+      throw new Error("STUB");
   }
 
   /**
@@ -157,9 +153,7 @@ export class LoremModule extends ModuleBase {
     sentenceCount: NumberOrRange = { min: 2, max: 6 },
     separator: string = ' '
   ): string {
-    return this.faker.helpers
-      .multiple(() => this.sentence(), { count: sentenceCount })
-      .join(separator);
+      throw new Error("STUB");
   }
 
   /**
@@ -177,7 +171,7 @@ export class LoremModule extends ModuleBase {
    * @since 2.0.1
    */
   paragraph(sentenceCount: NumberOrRange = 3): string {
-    return this.sentences(sentenceCount);
+      throw new Error("STUB");
   }
 
   /**
@@ -216,9 +210,7 @@ export class LoremModule extends ModuleBase {
     paragraphCount: NumberOrRange = 3,
     separator: string = '\n'
   ): string {
-    return this.faker.helpers
-      .multiple(() => this.paragraph(), { count: paragraphCount })
-      .join(separator);
+      throw new Error("STUB");
   }
 
   /**
@@ -277,6 +269,6 @@ export class LoremModule extends ModuleBase {
    * @since 3.1.0
    */
   lines(lineCount: NumberOrRange = { min: 1, max: 5 }): string {
-    return this.sentences(lineCount, '\n');
+      throw new Error("STUB");
   }
 }

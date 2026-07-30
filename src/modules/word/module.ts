@@ -117,16 +117,7 @@ export class WordModule extends ModuleBase {
           strategy?: 'fail' | 'closest' | 'shortest' | 'longest' | 'any-length';
         } = {}
   ): string {
-    if (typeof options === 'number') {
-      options = { length: options };
-    }
-
-    return this.faker.helpers.arrayElement(
-      filterWordListByLength({
-        ...options,
-        wordList: this.faker.definitions.word.adverb,
-      })
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -178,16 +169,7 @@ export class WordModule extends ModuleBase {
           strategy?: 'fail' | 'closest' | 'shortest' | 'longest' | 'any-length';
         } = {}
   ): string {
-    if (typeof options === 'number') {
-      options = { length: options };
-    }
-
-    return this.faker.helpers.arrayElement(
-      filterWordListByLength({
-        ...options,
-        wordList: this.faker.definitions.word.conjunction,
-      })
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -239,16 +221,7 @@ export class WordModule extends ModuleBase {
           strategy?: 'fail' | 'closest' | 'shortest' | 'longest' | 'any-length';
         } = {}
   ): string {
-    if (typeof options === 'number') {
-      options = { length: options };
-    }
-
-    return this.faker.helpers.arrayElement(
-      filterWordListByLength({
-        ...options,
-        wordList: this.faker.definitions.word.interjection,
-      })
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -361,16 +334,7 @@ export class WordModule extends ModuleBase {
           strategy?: 'fail' | 'closest' | 'shortest' | 'longest' | 'any-length';
         } = {}
   ): string {
-    if (typeof options === 'number') {
-      options = { length: options };
-    }
-
-    return this.faker.helpers.arrayElement(
-      filterWordListByLength({
-        ...options,
-        wordList: this.faker.definitions.word.preposition,
-      })
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -422,16 +386,7 @@ export class WordModule extends ModuleBase {
           strategy?: 'fail' | 'closest' | 'shortest' | 'longest' | 'any-length';
         } = {}
   ): string {
-    if (typeof options === 'number') {
-      options = { length: options };
-    }
-
-    return this.faker.helpers.arrayElement(
-      filterWordListByLength({
-        ...options,
-        wordList: this.faker.definitions.word.verb,
-      })
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -481,28 +436,7 @@ export class WordModule extends ModuleBase {
           strategy?: 'fail' | 'closest' | 'shortest' | 'longest' | 'any-length';
         } = {}
   ): string {
-    const wordMethods = this.faker.helpers.shuffle([
-      this.adjective,
-      this.adverb,
-      this.conjunction,
-      this.interjection,
-      this.noun,
-      this.preposition,
-      this.verb,
-    ]);
-
-    for (const randomWordMethod of wordMethods) {
-      try {
-        return randomWordMethod(options);
-      } catch {
-        // catch missing locale data potentially required by randomWordMethod
-        continue;
-      }
-    }
-
-    throw new FakerError(
-      'No matching word data available for the current locale'
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -531,14 +465,6 @@ export class WordModule extends ModuleBase {
           count?: NumberOrRange;
         } = {}
   ): string {
-    if (typeof options === 'number') {
-      options = { count: options };
-    }
-
-    const { count = { min: 1, max: 3 } } = options;
-
-    return this.faker.helpers
-      .multiple(() => this.sample(), { count })
-      .join(' ');
+      throw new Error("STUB");
   }
 }

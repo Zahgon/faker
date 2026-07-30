@@ -32,12 +32,7 @@ export class ImageModule extends ModuleBase {
    * @since 2.0.1
    */
   avatar(): string {
-    // Add new avatar providers here, when adding a new one.
-    const avatarMethod = this.faker.helpers.arrayElement([
-      this.personPortrait,
-      this.avatarGitHub,
-    ]);
-    return avatarMethod();
+      throw new Error("STUB");
   }
 
   /**
@@ -52,9 +47,7 @@ export class ImageModule extends ModuleBase {
    * @since 8.0.0
    */
   avatarGitHub(): string {
-    return `https://avatars.githubusercontent.com/u/${this.faker.number.int(
-      100000000
-    )}`;
+      throw new Error("STUB");
   }
 
   /**
@@ -90,16 +83,7 @@ export class ImageModule extends ModuleBase {
       size?: 512 | 256 | 128 | 64 | 32;
     } = {}
   ): string {
-    const { size = 512 } = options;
-    let { sex = this.faker.person.sexType() } = options;
-
-    if (sex === 'generic') {
-      sex = this.faker.person.sexType();
-    }
-
-    const baseURL =
-      'https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait';
-    return `${baseURL}/${sex}/${size}/${this.faker.number.int({ min: 0, max: 99 })}.jpg`;
+      throw new Error("STUB");
   }
 
   /**
@@ -139,7 +123,7 @@ export class ImageModule extends ModuleBase {
 
     const urlMethod = this.faker.helpers.arrayElement([
       ({ width, height }: { width?: number; height?: number }) =>
-        this.urlPicsumPhotos({ width, height, grayscale: false, blur: 0 }),
+        { throw new Error("STUB"); },
       // Other providers may be added back here in future versions.
     ]);
 
@@ -186,22 +170,7 @@ export class ImageModule extends ModuleBase {
       category?: string;
     } = {}
   ): string {
-    deprecated({
-      deprecated: 'faker.image.urlLoremFlickr()',
-      proposed: 'faker.image.url()',
-      since: '10.1.0',
-      until: '11.0.0',
-    });
-
-    const {
-      width = this.faker.number.int({ min: 1, max: 3999 }),
-      height = this.faker.number.int({ min: 1, max: 3999 }),
-      category,
-    } = options;
-
-    return `https://loremflickr.com/${width}/${height}${
-      category == null ? '' : `/${category}`
-    }?lock=${this.faker.number.int()}`;
+      throw new Error("STUB");
   }
 
   /**
@@ -329,21 +298,6 @@ export class ImageModule extends ModuleBase {
       type?: 'svg-uri' | 'svg-base64';
     } = {}
   ): string {
-    const {
-      width = this.faker.number.int({ min: 1, max: 3999 }),
-      height = this.faker.number.int({ min: 1, max: 3999 }),
-      color = this.faker.color.rgb(),
-      type = this.faker.helpers.arrayElement(['svg-uri', 'svg-base64']),
-    } = options;
-
-    const svgString = `<svg xmlns="http://www.w3.org/2000/svg" version="1.1" baseProfile="full" width="${width}" height="${height}"><rect width="100%" height="100%" fill="${color}"/><text x="${
-      width / 2
-    }" y="${
-      height / 2
-    }" font-size="20" alignment-baseline="middle" text-anchor="middle" fill="white">${width}x${height}</text></svg>`;
-
-    return type === 'svg-uri'
-      ? `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svgString)}`
-      : `data:image/svg+xml;base64,${toBase64(svgString)}`;
+      throw new Error("STUB");
   }
 }

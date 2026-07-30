@@ -6,10 +6,7 @@ import { ModuleBase } from '../../internal/module-base';
  * @param text The text to convert.
  */
 function toTitleCase(text: string): string {
-  return text
-    .split(' ')
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
+    throw new Error("STUB");
 }
 
 /**
@@ -45,9 +42,7 @@ export class FoodModule extends ModuleBase {
    * @since 9.0.0
    */
   description(): string {
-    return this.faker.helpers.fake(
-      this.faker.definitions.food.description_pattern
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -59,16 +54,7 @@ export class FoodModule extends ModuleBase {
    * @since 9.0.0
    */
   dish(): string {
-    // A 50/50 mix of specific dishes and dish_patterns
-    if (this.faker.datatype.boolean()) {
-      return toTitleCase(
-        this.faker.helpers.fake(this.faker.definitions.food.dish_pattern)
-      );
-    }
-
-    return toTitleCase(
-      this.faker.helpers.arrayElement(this.faker.definitions.food.dish)
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -80,9 +66,7 @@ export class FoodModule extends ModuleBase {
    * @since 9.0.0
    */
   ethnicCategory(): string {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.food.ethnic_category
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -94,7 +78,7 @@ export class FoodModule extends ModuleBase {
    * @since 9.0.0
    */
   fruit(): string {
-    return this.faker.helpers.arrayElement(this.faker.definitions.food.fruit);
+      throw new Error("STUB");
   }
 
   /**
@@ -106,9 +90,7 @@ export class FoodModule extends ModuleBase {
    * @since 9.0.0
    */
   ingredient(): string {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.food.ingredient
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -120,7 +102,7 @@ export class FoodModule extends ModuleBase {
    * @since 9.0.0
    */
   meat(): string {
-    return this.faker.helpers.arrayElement(this.faker.definitions.food.meat);
+      throw new Error("STUB");
   }
 
   /**
@@ -132,7 +114,7 @@ export class FoodModule extends ModuleBase {
    * @since 9.0.0
    */
   spice(): string {
-    return this.faker.helpers.arrayElement(this.faker.definitions.food.spice);
+      throw new Error("STUB");
   }
 
   /**
@@ -144,8 +126,6 @@ export class FoodModule extends ModuleBase {
    * @since 9.0.0
    */
   vegetable(): string {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.food.vegetable
-    );
+      throw new Error("STUB");
   }
 }

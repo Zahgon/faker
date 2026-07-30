@@ -24,7 +24,7 @@ export class CompanyModule extends ModuleBase {
    * @since 7.4.0
    */
   name(): string {
-    return this.faker.helpers.fake(this.faker.definitions.company.name_pattern);
+      throw new Error("STUB");
   }
 
   /**
@@ -36,11 +36,7 @@ export class CompanyModule extends ModuleBase {
    * @since 2.0.1
    */
   catchPhrase(): string {
-    return [
-      this.catchPhraseAdjective(),
-      this.catchPhraseDescriptor(),
-      this.catchPhraseNoun(),
-    ].join(' ');
+      throw new Error("STUB");
   }
 
   /**
@@ -52,7 +48,7 @@ export class CompanyModule extends ModuleBase {
    * @since 8.0.0
    */
   buzzPhrase(): string {
-    return [this.buzzVerb(), this.buzzAdjective(), this.buzzNoun()].join(' ');
+      throw new Error("STUB");
   }
 
   /**
@@ -64,9 +60,7 @@ export class CompanyModule extends ModuleBase {
    * @since 2.0.1
    */
   catchPhraseAdjective(): string {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.company.adjective
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -78,9 +72,7 @@ export class CompanyModule extends ModuleBase {
    * @since 2.0.1
    */
   catchPhraseDescriptor(): string {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.company.descriptor
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -92,7 +84,7 @@ export class CompanyModule extends ModuleBase {
    * @since 2.0.1
    */
   catchPhraseNoun(): string {
-    return this.faker.helpers.arrayElement(this.faker.definitions.company.noun);
+      throw new Error("STUB");
   }
 
   /**
@@ -104,9 +96,7 @@ export class CompanyModule extends ModuleBase {
    * @since 8.0.0
    */
   buzzAdjective(): string {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.company.buzz_adjective
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -118,9 +108,7 @@ export class CompanyModule extends ModuleBase {
    * @since 8.0.0
    */
   buzzVerb(): string {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.company.buzz_verb
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -132,8 +120,6 @@ export class CompanyModule extends ModuleBase {
    * @since 8.0.0
    */
   buzzNoun(): string {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.company.buzz_noun
-    );
+      throw new Error("STUB");
   }
 }

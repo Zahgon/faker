@@ -29,21 +29,5 @@ export interface DeprecatedOptions {
  * @internal
  */
 export function deprecated(options: DeprecatedOptions): void {
-  const { deprecated, since, until, proposed } = options;
-  let message = `[@faker-js/faker]: ${deprecated} is deprecated`;
-
-  if (since) {
-    message += ` since v${since}`;
-  }
-
-  if (until) {
-    message += ` and will be removed in v${until}`;
-  }
-
-  if (proposed) {
-    message += `. Please use ${proposed} instead`;
-  }
-
-  // eslint-disable-next-line no-undef -- Using console here is intentional and required
-  console.warn(`${message}.`);
+    throw new Error("STUB");
 }

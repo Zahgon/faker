@@ -48,11 +48,9 @@ const letters = [
 const forbiddenLetterPairs = new Set(['SS', 'SD', 'SA']);
 
 const letterPairs = letters.flatMap((first) =>
-  letters
-    .map((second) => first + second)
-    .filter((pair) => !forbiddenLetterPairs.has(pair))
+  { throw new Error("STUB"); }
 );
 
 export default digitPrefixes.flatMap((prefix) =>
-  letterPairs.map((pair) => `${prefix} ${pair}`)
+  { throw new Error("STUB"); }
 );

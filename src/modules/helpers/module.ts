@@ -29,48 +29,7 @@ function getRepetitionsBasedOnQuantifierParameters(
   quantifierMin: string,
   quantifierMax: string
 ) {
-  let repetitions = 1;
-  if (quantifierSymbol) {
-    switch (quantifierSymbol) {
-      case '?': {
-        repetitions = faker.datatype.boolean() ? 0 : 1;
-        break;
-      }
-
-      case '*': {
-        let limit = 1;
-        while (faker.datatype.boolean()) {
-          limit *= 2;
-        }
-
-        repetitions = faker.number.int({ min: 0, max: limit });
-        break;
-      }
-
-      case '+': {
-        let limit = 1;
-        while (faker.datatype.boolean()) {
-          limit *= 2;
-        }
-
-        repetitions = faker.number.int({ min: 1, max: limit });
-        break;
-      }
-
-      default: {
-        throw new FakerError('Unknown quantifier symbol provided.');
-      }
-    }
-  } else if (quantifierMin != null && quantifierMax != null) {
-    repetitions = faker.number.int({
-      min: Number.parseInt(quantifierMin),
-      max: Number.parseInt(quantifierMax),
-    });
-  } else if (quantifierMin != null && quantifierMax == null) {
-    repetitions = Number.parseInt(quantifierMin);
-  }
-
-  return repetitions;
+    throw new Error("STUB");
 }
 
 /**
@@ -101,64 +60,7 @@ function legacyRegexpStringParse(
   faker: SimpleFaker,
   string: string = ''
 ): string {
-  // Deal with range repeat `{min,max}`
-  const RANGE_REP_REG = /(.)\{(\d+),(\d+)\}/;
-  const REP_REG = /(.)\{(\d+)\}/;
-  const RANGE_REG = /\[(\d+)-(\d+)\]/;
-  let min: number;
-  let max: number;
-  let tmp: number;
-  let repetitions: number;
-  let token = RANGE_REP_REG.exec(string);
-  while (token != null) {
-    min = Number.parseInt(token[2]);
-    max = Number.parseInt(token[3]);
-    // switch min and max
-    if (min > max) {
-      tmp = max;
-      max = min;
-      min = tmp;
-    }
-
-    repetitions = faker.number.int({ min, max });
-    string =
-      string.slice(0, token.index) +
-      token[1].repeat(repetitions) +
-      string.slice(token.index + token[0].length);
-    token = RANGE_REP_REG.exec(string);
-  }
-
-  // Deal with repeat `{num}`
-  token = REP_REG.exec(string);
-  while (token != null) {
-    repetitions = Number.parseInt(token[2]);
-    string =
-      string.slice(0, token.index) +
-      token[1].repeat(repetitions) +
-      string.slice(token.index + token[0].length);
-    token = REP_REG.exec(string);
-  }
-  // Deal with range `[min-max]` (only works with numbers for now)
-
-  token = RANGE_REG.exec(string);
-  while (token != null) {
-    min = Number.parseInt(token[1]); // This time we are not capturing the char before `[]`
-    max = Number.parseInt(token[2]);
-    // switch min and max
-    if (min > max) {
-      tmp = max;
-      max = min;
-      min = tmp;
-    }
-
-    string =
-      string.slice(0, token.index) +
-      faker.number.int({ min, max }).toString() +
-      string.slice(token.index + token[0].length);
-    token = RANGE_REG.exec(string);
-  }
-
-  return string;
+    throw new Error("STUB");
 }
 
 /**
@@ -173,58 +75,7 @@ function replaceUnquantifiedRegExpTokens(
   pattern: string,
   isCaseInsensitive: boolean
 ): string {
-  let result = '';
-  let inCharacterClass = false;
-
-  for (let i = 0; i < pattern.length; i++) {
-    const char = pattern[i];
-
-    if (char === '\\') {
-      result += char;
-      if (i + 1 < pattern.length) {
-        result += pattern[++i];
-      }
-
-      continue;
-    }
-
-    if (char === '[') {
-      inCharacterClass = true;
-      result += char;
-      continue;
-    }
-
-    if (char === ']') {
-      inCharacterClass = false;
-      result += char;
-      continue;
-    }
-
-    const nextChar = pattern[i + 1];
-    const hasQuantifier = ['?', '*', '+', '{'].includes(nextChar);
-
-    if (!inCharacterClass && !hasQuantifier && char === '.') {
-      result += faker.string.alphanumeric();
-      continue;
-    }
-
-    if (
-      !inCharacterClass &&
-      !hasQuantifier &&
-      isCaseInsensitive &&
-      /^[a-z]$/i.test(char)
-    ) {
-      result += faker.string.fromCharacters([
-        char.toLowerCase(),
-        char.toUpperCase(),
-      ]);
-      continue;
-    }
-
-    result += char;
-  }
-
-  return result;
+    throw new Error("STUB");
 }
 
 /**
@@ -252,18 +103,7 @@ export function legacyReplaceSymbolWithNumber(
   string: string = '',
   symbol: string = '#'
 ): string {
-  let result = '';
-  for (let i = 0; i < string.length; i++) {
-    if (string.charAt(i) === symbol) {
-      result += faker.number.int(9);
-    } else if (string.charAt(i) === '!') {
-      result += faker.number.int({ min: 2, max: 9 });
-    } else {
-      result += string.charAt(i);
-    }
-  }
-
-  return result;
+    throw new Error("STUB");
 }
 
 /**
@@ -310,51 +150,7 @@ export class SimpleHelpersModule extends SimpleModuleBase {
    * @since 3.0.0
    */
   replaceSymbols(string: string = ''): string {
-    const alpha = [
-      'A',
-      'B',
-      'C',
-      'D',
-      'E',
-      'F',
-      'G',
-      'H',
-      'I',
-      'J',
-      'K',
-      'L',
-      'M',
-      'N',
-      'O',
-      'P',
-      'Q',
-      'R',
-      'S',
-      'T',
-      'U',
-      'V',
-      'W',
-      'X',
-      'Y',
-      'Z',
-    ];
-    let result = '';
-
-    for (let i = 0; i < string.length; i++) {
-      if (string.charAt(i) === '#') {
-        result += this.faker.number.int(9);
-      } else if (string.charAt(i) === '?') {
-        result += this.arrayElement(alpha);
-      } else if (string.charAt(i) === '*') {
-        result += this.faker.datatype.boolean()
-          ? this.arrayElement(alpha)
-          : this.faker.number.int(9);
-      } else {
-        result += string.charAt(i);
-      }
-    }
-
-    return result;
+      throw new Error("STUB");
   }
 
   /**
@@ -376,13 +172,7 @@ export class SimpleHelpersModule extends SimpleModuleBase {
     string: string = '6453-####-####-####-###L',
     symbol: string = '#'
   ): string {
-    // default values required for calling method without arguments
-
-    string = legacyRegexpStringParse(this.faker, string); // replace [4-9] with a random number in range etc...
-    string = legacyReplaceSymbolWithNumber(this.faker, string, symbol); // replace ### with random numbers
-
-    const checkNum = luhnCheckValue(string);
-    return string.replace('L', String(checkNum));
+      throw new Error("STUB");
   }
 
   /**
@@ -434,221 +224,7 @@ export class SimpleHelpersModule extends SimpleModuleBase {
    * @since 8.0.0
    */
   fromRegExp(pattern: string | RegExp): string {
-    let isCaseInsensitive = false;
-
-    if (pattern instanceof RegExp) {
-      isCaseInsensitive = pattern.flags.includes('i');
-      pattern = pattern.source.replace(/^\^+/, '').replace(/\$+$/, '');
-    }
-
-    if (pattern === '.') {
-      return this.faker.string.alphanumeric();
-    }
-
-    if (isCaseInsensitive && /^[a-z]$/i.test(pattern)) {
-      return this.faker.string.fromCharacters([
-        pattern.toLowerCase(),
-        pattern.toUpperCase(),
-      ]);
-    }
-
-    pattern = replaceUnquantifiedRegExpTokens(
-      this.faker,
-      pattern,
-      isCaseInsensitive
-    );
-
-    let min: number;
-    let max: number;
-    let repetitions: number;
-
-    // Deal with single wildcards
-    const SINGLE_CHAR_REG =
-      /([.A-Za-z0-9])(?:\{(\d+)(?:,(\d+)|)\}|(\?|\*|\+))(?![^[]*]|[^{]*})/;
-    let token = SINGLE_CHAR_REG.exec(pattern);
-    while (token != null) {
-      const quantifierMin: string = token[2];
-      const quantifierMax: string = token[3];
-      const quantifierSymbol: string = token[4];
-
-      repetitions = getRepetitionsBasedOnQuantifierParameters(
-        this.faker,
-        quantifierSymbol,
-        quantifierMin,
-        quantifierMax
-      );
-
-      let replacement: string;
-      if (token[1] === '.') {
-        replacement = this.faker.string.alphanumeric(repetitions);
-      } else if (isCaseInsensitive) {
-        replacement = this.faker.string.fromCharacters(
-          [token[1].toLowerCase(), token[1].toUpperCase()],
-          repetitions
-        );
-      } else {
-        replacement = token[1].repeat(repetitions);
-      }
-
-      pattern =
-        pattern.slice(0, token.index) +
-        replacement +
-        pattern.slice(token.index + token[0].length);
-      token = SINGLE_CHAR_REG.exec(pattern);
-    }
-
-    const SINGLE_RANGE_REG = /(\d-\d|\w-\w|\d|\w|[-!@#$&()`.+,/"])/;
-    const RANGE_ALPHANUMERIC_REG =
-      /\[(\^|)(-|)(.+?)\](?:\{(\d+)(?:,(\d+)|)\}|(\?|\*|\+)|)/;
-    // Deal with character classes with quantifiers `[a-z0-9]{min[, max]}`
-    token = RANGE_ALPHANUMERIC_REG.exec(pattern);
-    while (token != null) {
-      const isNegated = token[1] === '^';
-      const includesDash: boolean = token[2] === '-';
-      const quantifierMin: string = token[4];
-      const quantifierMax: string = token[5];
-      const quantifierSymbol: string = token[6];
-
-      const rangeCodes: number[] = [];
-
-      let ranges = token[3];
-      let range = SINGLE_RANGE_REG.exec(ranges);
-
-      if (includesDash) {
-        // 45 is the ascii code for '-'
-        rangeCodes.push(45);
-      }
-
-      while (range != null) {
-        if (range[0].includes('-')) {
-          // handle ranges
-          const rangeMinMax = range[0]
-            .split('-')
-            .map((x) => x.codePointAt(0) ?? Number.NaN);
-          min = rangeMinMax[0];
-          max = rangeMinMax[1];
-          // throw error if min larger than max
-          if (min > max) {
-            throw new FakerError('Character range provided is out of order.');
-          }
-
-          for (let i = min; i <= max; i++) {
-            if (
-              isCaseInsensitive &&
-              Number.isNaN(Number(String.fromCodePoint(i)))
-            ) {
-              const ch = String.fromCodePoint(i);
-              rangeCodes.push(
-                ch.toUpperCase().codePointAt(0) ?? Number.NaN,
-                ch.toLowerCase().codePointAt(0) ?? Number.NaN
-              );
-            } else {
-              rangeCodes.push(i);
-            }
-          }
-        } else {
-          // handle non-ranges
-          if (isCaseInsensitive && Number.isNaN(Number(range[0]))) {
-            rangeCodes.push(
-              range[0].toUpperCase().codePointAt(0) ?? Number.NaN,
-              range[0].toLowerCase().codePointAt(0) ?? Number.NaN
-            );
-          } else {
-            rangeCodes.push(range[0].codePointAt(0) ?? Number.NaN);
-          }
-        }
-
-        ranges = ranges.substring(range[0].length);
-        range = SINGLE_RANGE_REG.exec(ranges);
-      }
-
-      repetitions = getRepetitionsBasedOnQuantifierParameters(
-        this.faker,
-        quantifierSymbol,
-        quantifierMin,
-        quantifierMax
-      );
-
-      if (isNegated) {
-        let index;
-        // 0-9
-        for (let i = 48; i <= 57; i++) {
-          index = rangeCodes.indexOf(i);
-          if (index > -1) {
-            rangeCodes.splice(index, 1);
-            continue;
-          }
-
-          rangeCodes.push(i);
-        }
-
-        // A-Z
-        for (let i = 65; i <= 90; i++) {
-          index = rangeCodes.indexOf(i);
-          if (index > -1) {
-            rangeCodes.splice(index, 1);
-            continue;
-          }
-
-          rangeCodes.push(i);
-        }
-
-        // a-z
-        for (let i = 97; i <= 122; i++) {
-          index = rangeCodes.indexOf(i);
-          if (index > -1) {
-            rangeCodes.splice(index, 1);
-            continue;
-          }
-
-          rangeCodes.push(i);
-        }
-      }
-
-      const generatedString = this.multiple(
-        () => String.fromCodePoint(this.arrayElement(rangeCodes)),
-        { count: repetitions }
-      ).join('');
-
-      pattern =
-        pattern.slice(0, token.index) +
-        generatedString +
-        pattern.slice(token.index + token[0].length);
-      token = RANGE_ALPHANUMERIC_REG.exec(pattern);
-    }
-
-    const RANGE_REP_REG = /(.)\{(\d+),(\d+)\}/;
-    // Deal with quantifier ranges `{min,max}`
-    token = RANGE_REP_REG.exec(pattern);
-    while (token != null) {
-      min = Number.parseInt(token[2]);
-      max = Number.parseInt(token[3]);
-      // throw error if min larger than max
-      if (min > max) {
-        throw new FakerError('Numbers out of order in {} quantifier.');
-      }
-
-      repetitions = this.faker.number.int({ min, max });
-      pattern =
-        pattern.slice(0, token.index) +
-        token[1].repeat(repetitions) +
-        pattern.slice(token.index + token[0].length);
-      token = RANGE_REP_REG.exec(pattern);
-    }
-
-    const REP_REG = /(.)\{(\d+)\}/;
-    // Deal with repeat `{num}`
-    token = REP_REG.exec(pattern);
-    while (token != null) {
-      repetitions = Number.parseInt(token[2]);
-      pattern =
-        pattern.slice(0, token.index) +
-        token[1].repeat(repetitions) +
-        pattern.slice(token.index + token[0].length);
-      token = REP_REG.exec(pattern);
-    }
-
-    return pattern;
+      throw new Error("STUB");
   }
 
   /**
@@ -730,19 +306,7 @@ export class SimpleHelpersModule extends SimpleModuleBase {
     }
   ): T[];
   shuffle<const T>(list: T[], options: { inplace?: boolean } = {}): T[] {
-    const { inplace = false } = options;
-
-    if (!inplace) {
-      list = [...list];
-    }
-
-    for (let i = list.length - 1; i > 0; --i) {
-      const j = this.faker.number.int(i);
-      // eslint-disable-next-line unicorn/no-unreadable-array-destructuring
-      [list[i], list[j]] = [list[j], list[i]];
-    }
-
-    return list;
+      throw new Error("STUB");
   }
 
   /**
@@ -771,27 +335,7 @@ export class SimpleHelpersModule extends SimpleModuleBase {
     source: ReadonlyArray<T> | (() => T),
     length: number
   ): T[] {
-    if (Array.isArray(source)) {
-      const set = new Set<T>(source);
-      const array = [...set];
-      return this.shuffle(array).splice(0, length);
-    }
-
-    const set = new Set<T>();
-    try {
-      if (typeof source === 'function') {
-        const maxAttempts = 1000 * length;
-        let attempts = 0;
-        while (set.size < length && attempts < maxAttempts) {
-          set.add(source());
-          attempts++;
-        }
-      }
-    } catch {
-      // Ignore
-    }
-
-    return [...set];
+      throw new Error("STUB");
   }
 
   /**
@@ -814,23 +358,7 @@ export class SimpleHelpersModule extends SimpleModuleBase {
     text: string | undefined,
     data: Record<string, string | Parameters<string['replace']>[1]>
   ): string {
-    if (text == null) {
-      return '';
-    }
-
-    for (const p in data) {
-      const re = new RegExp(`{{${p}}}`, 'g');
-      let value = data[p];
-      if (typeof value === 'string') {
-        // escape $, source: https://stackoverflow.com/a/6969486/6897682
-        value = value.replaceAll('$', '$$$$');
-        text = text.replace(re, value);
-      } else {
-        text = text.replace(re, value);
-      }
-    }
-
-    return text;
+      throw new Error("STUB");
   }
 
   /**
@@ -860,11 +388,7 @@ export class SimpleHelpersModule extends SimpleModuleBase {
       probability?: number;
     } = {}
   ): TResult | undefined {
-    if (this.faker.datatype.boolean(options)) {
-      return callback();
-    }
-
-    return undefined;
+      throw new Error("STUB");
   }
 
   /**
@@ -882,8 +406,7 @@ export class SimpleHelpersModule extends SimpleModuleBase {
    * @since 6.3.0
    */
   objectKey<const T extends Record<string, unknown>>(object: T): keyof T {
-    const array: Array<keyof T> = Object.keys(object);
-    return this.arrayElement(array);
+      throw new Error("STUB");
   }
 
   /**
@@ -901,8 +424,7 @@ export class SimpleHelpersModule extends SimpleModuleBase {
    * @since 6.3.0
    */
   objectValue<const T extends Record<string, unknown>>(object: T): T[keyof T] {
-    const key = this.faker.helpers.objectKey(object);
-    return object[key];
+      throw new Error("STUB");
   }
 
   /**
@@ -922,8 +444,7 @@ export class SimpleHelpersModule extends SimpleModuleBase {
   objectEntry<const T extends Record<string, unknown>>(
     object: T
   ): [keyof T, T[keyof T]] {
-    const key = this.faker.helpers.objectKey(object);
-    return [key, object[key]];
+      throw new Error("STUB");
   }
 
   /**
@@ -982,34 +503,7 @@ export class SimpleHelpersModule extends SimpleModuleBase {
       value: T;
     }>
   ): T {
-    if (array.length === 0) {
-      throw new FakerError(
-        'weightedArrayElement expects an array with at least one element'
-      );
-    }
-
-    if (array.some((elt) => elt.weight <= 0)) {
-      throw new FakerError(
-        'weightedArrayElement expects an array of { weight, value } objects where weight is a positive number'
-      );
-    }
-
-    const total = array.reduce((sum, { weight }) => sum + weight, 0);
-    const random = this.faker.number.float({
-      min: 0,
-      max: total,
-    });
-    let current = 0;
-    for (const { weight, value } of array) {
-      current += weight;
-      if (random < current) {
-        return value;
-      }
-    }
-
-    // In case of rounding errors, return the last element
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    return array.at(-1)!.value;
+      throw new Error("STUB");
   }
 
   /**
@@ -1030,33 +524,7 @@ export class SimpleHelpersModule extends SimpleModuleBase {
    * @since 6.3.0
    */
   arrayElements<const T>(array: ReadonlyArray<T>, count?: NumberOrRange): T[] {
-    if (array.length === 0) {
-      return [];
-    }
-
-    const numElements = this.rangeToNumber(
-      count ?? { min: 1, max: array.length }
-    );
-
-    if (numElements >= array.length) {
-      return this.shuffle(array);
-    } else if (numElements <= 0) {
-      return [];
-    }
-
-    const arrayCopy = [...array];
-    let i = array.length;
-    const min = i - numElements;
-
-    // Shuffle the last `count` elements of the array
-    while (i-- > min) {
-      const index = this.faker.number.int(i);
-      const temp = arrayCopy[index];
-      arrayCopy[index] = arrayCopy[i];
-      arrayCopy[i] = temp;
-    }
-
-    return arrayCopy.slice(min);
+      throw new Error("STUB");
   }
 
   /**
@@ -1084,12 +552,7 @@ export class SimpleHelpersModule extends SimpleModuleBase {
   enumValue<T extends Record<string | number, string | number>>(
     enumObject: T
   ): T[keyof T] {
-    // ignore numeric keys added by TypeScript
-    const keys: Array<keyof T> = Object.keys(enumObject).filter((key) =>
-      Number.isNaN(Number(key))
-    );
-    const randomKey = this.arrayElement(keys);
-    return enumObject[randomKey];
+      throw new Error("STUB");
   }
 
   /**
@@ -1323,32 +786,6 @@ export class HelpersModule extends SimpleHelpersModule {
    */
   fake(pattern: string | ReadonlyArray<string>): string;
   fake(pattern: string | ReadonlyArray<string>): string {
-    pattern =
-      typeof pattern === 'string' ? pattern : this.arrayElement(pattern);
-
-    // find first matching {{ and }}
-    const start = pattern.search(/{{[a-z]/);
-    const end = pattern.indexOf('}}', start);
-
-    // if no {{ and }} is found, we are done
-    if (start === -1 || end === -1) {
-      return pattern;
-    }
-
-    // extract method name from between the {{ }} that we found
-    // for example: {{person.firstName}}
-    const token = pattern.substring(start + 2, end + 2);
-    const method = token.replace('}}', '').replace('{{', '');
-
-    const result = fakeEval(method, this.faker);
-    const stringified = String(result);
-
-    // Replace the found tag with the returned fake value
-    // We cannot use string.replace here because the result might contain evaluated characters
-    const patched =
-      pattern.substring(0, start) + stringified + pattern.substring(end + 2);
-
-    // return the response recursively until we are done finding all tags
-    return this.fake(patched);
+      throw new Error("STUB");
   }
 }

@@ -9,32 +9,19 @@ import type { NumberOrRange, NumberRange } from '../../utils/types';
  */
 const STRATEGIES = {
   fail: () => {
-    throw new FakerError('No words found that match the given length.');
-  },
+        throw new Error("STUB");
+    },
   closest: (wordList: ReadonlyArray<string>, length: NumberRange): string[] => {
-    const wordsByLength = groupBy(wordList, (word) => word.length);
-    const lengths = Object.keys(wordsByLength).map(Number);
-    const min = Math.min(...lengths);
-    const max = Math.max(...lengths);
-
-    const closestOffset = Math.min(length.min - min, max - length.max);
-
-    return wordList.filter(
-      (word) =>
-        word.length === length.min - closestOffset ||
-        word.length === length.max + closestOffset
-    );
+      throw new Error("STUB");
   },
   shortest: (wordList: ReadonlyArray<string>): string[] => {
-    const minLength = Math.min(...wordList.map((word) => word.length));
-    return wordList.filter((word) => word.length === minLength);
+      throw new Error("STUB");
   },
   longest: (wordList: ReadonlyArray<string>): string[] => {
-    const maxLength = Math.max(...wordList.map((word) => word.length));
-    return wordList.filter((word) => word.length === maxLength);
+      throw new Error("STUB");
   },
   'any-length': (wordList: ReadonlyArray<string>): string[] => {
-    return [...wordList];
+      throw new Error("STUB");
   },
 } satisfies Record<
   NonNullable<Parameters<typeof filterWordListByLength>[0]['strategy']>,
@@ -69,8 +56,8 @@ export function filterWordListByLength(options: {
   if (length != null) {
     const filter: (word: string) => boolean =
       typeof length === 'number'
-        ? (word) => word.length === length
-        : (word) => word.length >= length.min && word.length <= length.max;
+        ? (word) => { throw new Error("STUB"); }
+        : (word) => { throw new Error("STUB"); };
 
     const wordListWithLengthFilter = wordList.filter(filter);
 

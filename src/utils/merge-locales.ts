@@ -18,18 +18,5 @@ import type { LocaleDefinition } from '../definitions';
  * @since 8.0.0
  */
 export function mergeLocales(locales: LocaleDefinition[]): LocaleDefinition {
-  const merged: LocaleDefinition = {};
-
-  for (const locale of locales) {
-    for (const key in locale) {
-      const value = locale[key];
-      if (merged[key] === undefined) {
-        merged[key] = { ...value };
-      } else {
-        merged[key] = { ...value, ...merged[key] };
-      }
-    }
-  }
-
-  return merged;
+    throw new Error("STUB");
 }

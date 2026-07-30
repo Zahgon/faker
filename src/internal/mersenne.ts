@@ -25,7 +25,7 @@ const { imul, trunc } = Math;
  * @param seed The seed to generate the random state from.
  */
 function seedFrom(seed: number | number[]): number[] {
-  return typeof seed === 'number' ? numberSeeded(seed) : arraySeeded(seed);
+    throw new Error("STUB");
 }
 
 /**
@@ -34,15 +34,7 @@ function seedFrom(seed: number | number[]): number[] {
  * @param seed The seed to generate the random state from.
  */
 function numberSeeded(seed: number): number[] {
-  const out = Array.from<number>({ length: N });
-  out[0] = seed;
-
-  for (let idx = 1; idx !== N; ++idx) {
-    const xored = out[idx - 1] ^ (out[idx - 1] >>> 30);
-    out[idx] = trunc(imul(F, xored) + idx);
-  }
-
-  return out;
+    throw new Error("STUB");
 }
 
 /**
@@ -51,45 +43,7 @@ function numberSeeded(seed: number): number[] {
  * @param seed The seed to generate the random state from.
  */
 function arraySeeded(seed: number[]): number[] {
-  const out = numberSeeded(19650218);
-
-  let idxOut = 1;
-  let idxSeed = 0;
-
-  for (let iteration = Math.max(N, seed.length); iteration !== 0; --iteration) {
-    const xored = out[idxOut - 1] ^ (out[idxOut - 1] >>> 30);
-    out[idxOut] = trunc(
-      (out[idxOut] ^ imul(xored, 1664525)) + seed[idxSeed] + idxSeed
-    );
-    idxOut++;
-    idxSeed++;
-
-    if (idxOut >= N) {
-      out[0] = out[N - 1];
-      idxOut = 1;
-    }
-
-    if (idxSeed >= seed.length) {
-      idxSeed = 0;
-    }
-  }
-
-  for (let iteration = N - 1; iteration !== 0; iteration--) {
-    out[idxOut] = trunc(
-      (out[idxOut] ^
-        imul(out[idxOut - 1] ^ (out[idxOut - 1] >>> 30), 1566083941)) -
-        idxOut
-    );
-    idxOut++;
-
-    if (idxOut >= N) {
-      out[0] = out[N - 1];
-      idxOut = 1;
-    }
-  }
-
-  out[0] = 0x80000000;
-  return out;
+    throw new Error("STUB");
 }
 
 /**
@@ -184,7 +138,6 @@ export class MersenneTwister19937 {
    * @param seed The seed to use.
    */
   seed(seed: number | number[]): void {
-    this.states = twist(seedFrom(seed));
-    this.index = 0;
+      throw new Error("STUB");
   }
 }

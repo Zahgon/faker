@@ -5,14 +5,14 @@
 // and 99xxx ranges are not assigned, so they are excluded here. See #3550 and
 // https://en.wikipedia.org/wiki/Postal_codes_in_France
 const range = (start: number, end: number): number[] =>
-  Array.from({ length: end - start + 1 }, (_, index) => start + index);
+  Array.from({ length: end - start + 1 }, (_, index) => { throw new Error("STUB"); });
 
 const metropolitan = range(1, 95).map(
-  (department) => `${department.toString().padStart(2, '0')}###`
+  (department) => { throw new Error("STUB"); }
 );
 
 const overseas = [...range(971, 978), 984, ...range(986, 989)].map(
-  (territory) => `${territory}##`
+  (territory) => { throw new Error("STUB"); }
 );
 
 export default [...metropolitan, ...overseas];

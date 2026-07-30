@@ -37,7 +37,7 @@ export function groupBy<TOriginalValue, TMappedValue>(
   values: ReadonlyArray<TOriginalValue>,
   keyMapper: (value: TOriginalValue) => string | number,
   valueMapper: (value: TOriginalValue) => TMappedValue = (value) =>
-    value as unknown as TMappedValue
+    { throw new Error("STUB"); }
 ): Record<string, TMappedValue[]> {
   const result: Record<string, TMappedValue[]> = Object.create(null);
 

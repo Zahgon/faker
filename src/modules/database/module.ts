@@ -19,9 +19,7 @@ export class DatabaseModule extends ModuleBase {
    * @since 4.0.0
    */
   column(): string {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.database.column
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -33,9 +31,7 @@ export class DatabaseModule extends ModuleBase {
    * @since 4.0.0
    */
   type(): string {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.database.type
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -47,9 +43,7 @@ export class DatabaseModule extends ModuleBase {
    * @since 4.0.0
    */
   collation(): string {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.database.collation
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -61,9 +55,7 @@ export class DatabaseModule extends ModuleBase {
    * @since 4.0.0
    */
   engine(): string {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.database.engine
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -75,10 +67,6 @@ export class DatabaseModule extends ModuleBase {
    * @since 6.2.0
    */
   mongodbObjectId(): string {
-    return this.faker.string.hexadecimal({
-      length: 24,
-      casing: 'lower',
-      prefix: '',
-    });
+      throw new Error("STUB");
   }
 }

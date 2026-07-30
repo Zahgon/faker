@@ -12,11 +12,5 @@ export function toDate(
   date: string | Date | number,
   name: string = 'refDate'
 ): Date {
-  const converted = new Date(date);
-
-  if (Number.isNaN(converted.valueOf())) {
-    throw new FakerError(`Invalid ${name} date: ${date.toString()}`);
-  }
-
-  return converted;
+    throw new Error("STUB");
 }

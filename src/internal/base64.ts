@@ -16,13 +16,9 @@
 export const toBase64: (input: string) => string =
   typeof Buffer === 'undefined' || !bufferFeatureCheck('base64')
     ? (input) => {
-        const utf8Bytes = new TextEncoder().encode(input);
-        const binaryString = Array.from(utf8Bytes, (byte) =>
-          String.fromCodePoint(byte)
-        ).join('');
-        return btoa(binaryString);
-      }
-    : (input) => Buffer.from(input).toString('base64');
+        throw new Error("STUB");
+    }
+    : (input) => { throw new Error("STUB"); };
 
 /**
  * This works the same as `Buffer.from(input).toString('base64url')`
@@ -41,11 +37,8 @@ export const toBase64: (input: string) => string =
 export const toBase64Url: (input: string) => string =
   typeof Buffer === 'undefined' || !bufferFeatureCheck('base64url')
     ? (input) =>
-        toBase64(input)
-          .replaceAll('+', '-')
-          .replaceAll('/', '_')
-          .replaceAll(/=+$/g, '')
-    : (input) => Buffer.from(input).toString('base64url');
+        { throw new Error("STUB"); }
+    : (input) => { throw new Error("STUB"); };
 
 /**
  * Checks whether the environment supports the given encoding on the `Buffer` class.

@@ -19,7 +19,7 @@ export class VehicleModule extends ModuleBase {
    * @since 5.0.0
    */
   vehicle(): string {
-    return `${this.manufacturer()} ${this.model()}`;
+      throw new Error("STUB");
   }
 
   /**
@@ -31,9 +31,7 @@ export class VehicleModule extends ModuleBase {
    * @since 5.0.0
    */
   manufacturer(): string {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.vehicle.manufacturer
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -45,9 +43,7 @@ export class VehicleModule extends ModuleBase {
    * @since 5.0.0
    */
   model(): string {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.vehicle.model
-    );
+      throw new Error("STUB");
   }
 
   /**
@@ -59,7 +55,7 @@ export class VehicleModule extends ModuleBase {
    * @since 5.0.0
    */
   type(): string {
-    return this.faker.helpers.arrayElement(this.faker.definitions.vehicle.type);
+      throw new Error("STUB");
   }
 
   /**
@@ -71,7 +67,7 @@ export class VehicleModule extends ModuleBase {
    * @since 5.0.0
    */
   fuel(): string {
-    return this.faker.helpers.arrayElement(this.faker.definitions.vehicle.fuel);
+      throw new Error("STUB");
   }
 
   /**
@@ -83,20 +79,7 @@ export class VehicleModule extends ModuleBase {
    * @since 5.0.0
    */
   vin(): string {
-    const exclude = ['o', 'i', 'q', 'O', 'I', 'Q'];
-    return `${this.faker.string.alphanumeric({
-      length: 10,
-      casing: 'upper',
-      exclude,
-    })}${this.faker.string.alpha({
-      length: 1,
-      casing: 'upper',
-      exclude,
-    })}${this.faker.string.alphanumeric({
-      length: 1,
-      casing: 'upper',
-      exclude,
-    })}${this.faker.string.numeric({ length: 5, allowLeadingZeros: true })}`;
+      throw new Error("STUB");
   }
 
   /**
@@ -108,7 +91,7 @@ export class VehicleModule extends ModuleBase {
    * @since 5.0.0
    */
   color(): string {
-    return this.faker.color.human();
+      throw new Error("STUB");
   }
 
   /**
@@ -120,16 +103,7 @@ export class VehicleModule extends ModuleBase {
    * @since 5.4.0
    */
   vrm(): string {
-    return `${this.faker.string.alpha({
-      length: 2,
-      casing: 'upper',
-    })}${this.faker.string.numeric({
-      length: 2,
-      allowLeadingZeros: true,
-    })}${this.faker.string.alpha({
-      length: 3,
-      casing: 'upper',
-    })}`;
+      throw new Error("STUB");
   }
 
   /**
@@ -141,8 +115,6 @@ export class VehicleModule extends ModuleBase {
    * @since 5.5.0
    */
   bicycle(): string {
-    return this.faker.helpers.arrayElement(
-      this.faker.definitions.vehicle.bicycle_type
-    );
+      throw new Error("STUB");
   }
 }

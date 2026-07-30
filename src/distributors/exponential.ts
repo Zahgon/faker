@@ -94,13 +94,5 @@ export function exponentialDistributor(
     bias?: number;
   } = {}
 ): Distributor {
-  const { bias = -1, base = bias <= 0 ? -bias + 1 : 1 / (bias + 1) } = options;
-
-  if (base === 1) {
-    return uniformDistributor();
-  } else if (base <= 0) {
-    throw new FakerError('Base should be greater than 0.');
-  }
-
-  return ({ next }) => (base ** next() - 1) / (base - 1);
+    throw new Error("STUB");
 }
